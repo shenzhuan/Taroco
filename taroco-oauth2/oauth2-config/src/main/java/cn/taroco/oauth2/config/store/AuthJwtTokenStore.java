@@ -3,8 +3,10 @@ package cn.taroco.oauth2.config.store;
 import cn.taroco.common.constants.CommonConstant;
 import cn.taroco.common.constants.SecurityConstants;
 import cn.taroco.oauth2.config.util.UserDetailsImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.bootstrap.encrypt.KeyProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -24,6 +26,9 @@ import java.util.Map;
  * @date 2018/7/24 16:21
  */
 public class AuthJwtTokenStore {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Bean("keyProp")
     public KeyProperties keyProperties() {
@@ -60,11 +65,16 @@ public class AuthJwtTokenStore {
         return (accessToken, authentication) -> {
             final Map<String, Object> additionalInfo = new HashMap<>(2);
             additionalInfo.put("license", SecurityConstants.LICENSE);
-            UserDetailsImpl user = (UserDetailsImpl) authentication.getUserAuthentication().getPrincipal();
-            if (user != null) {
-                additionalInfo.put("userId", user.getUserId());
-                additionalInfo.put(CommonConstant.HEADER_LABEL, user.getLabel());
+            final Object principal = authentication.getUserAuthentication().getPrincipal();
+            UserDetailsImpl user;
+            if (principal instanceof UserDetailsImpl) {
+                user = (UserDetailsImpl) principal;
+            } else {
+                final String username = (String) principal;
+                user = (UserDetailsImpl) userDetailsService.loadUserByUsername(username);
             }
+            additionalInfo.put("userId", user.getUserId());
+            additionalInfo.put(CommonConstant.HEADER_LABEL, user.getLabel());
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
             return accessToken;
         };

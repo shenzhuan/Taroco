@@ -104,7 +104,7 @@ public class AbstractAuthServerConfig extends AuthorizationServerConfigurerAdapt
         if (tokenEnhancer != null && jwtAccessTokenConverter != null) {
             TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
             tokenEnhancerChain.setTokenEnhancers(
-                    Arrays.asList(tokenEnhancer, jwtAccessTokenConverter));
+                    Arrays.asList(jwtAccessTokenConverter, tokenEnhancer));
             defaultTokenServices.setTokenEnhancer(tokenEnhancerChain);
         }
 

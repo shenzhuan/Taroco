@@ -17,6 +17,6 @@ eureka:
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
   server:
     # 关闭自我保护模式(生产环境不建议关闭)
-    enable-self-preservation: false
+    enable-self-preservation: true
     # 清理无效节点间隔（单位毫秒，默认是60*1000）开发阶段调小
-    eviction-interval-timer-in-ms: 10000
+    eviction-interval-timer-in-ms: 60000

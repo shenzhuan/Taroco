@@ -3,13 +3,13 @@ server:
 spring:
   application:
     name: taroco-config
-  profiles:
-    active: native
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/config-dev/, classpath:/config-test/
+        git:
+          uri: https://github.com/liuht777/Taroco-Config
+          search-paths: config-dev, config-test
+          default-label: master
 
 # eureka配置
 eureka:
@@ -18,16 +18,16 @@ eureka:
       # eureka注册中心地址
       defaultZone: http://localhost:9000/eureka/
     # eureka客户端从eureka服务器注册表中获取服务注册信息的时间间隔（s），默认为30秒,开发阶段调小
-    registry-fetch-interval-seconds: 10
+    registry-fetch-interval-seconds: 30
   instance:
       # 注册服务ip到eureka server上
       prefer-ip-address: true
       # 自定义服务实例id
       instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
       # 服务实例的续约到期时间（默认90秒），也就是心跳的最大等待时间。开发阶段调小
-      lease-expiration-duration-in-seconds: 10
+      lease-expiration-duration-in-seconds: 90
       # 服务实例的续约更新时间间隔（默认30秒），也就是心跳时间。开发阶段调小
-      lease-renewal-interval-in-seconds: 6
+      lease-renewal-interval-in-seconds: 30
       metadata-map:
         # 服务实例权重 默认100
         weight: 100

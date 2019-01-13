@@ -16,13 +16,13 @@ base:
   auth:
     server: http://taroco-authentication-server:9001
   mysql:
-    url: jdbc:mysql://172.27.0.11:3306
+    url: jdbc:mysql://taroco-mysql:3306
   redis:
-    host: 172.27.0.11
+    host: taroco-redis
     port: 6379
     password: taroco!@#$
   zipkin:
-    url: http://172.27.0.11:10003/
+    url: http://taroco-zipkin:10003/
 
 logging:
   file: logs/${spring.application.name}/${spring.application.name}.log

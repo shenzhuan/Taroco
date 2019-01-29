@@ -20,19 +20,7 @@ services:
     networks:
       - taroco
 
-  taroco-admin:
-    build:
-      context: ./
-      dockerfile: Dockerfile-admin
-    restart: always
-    ports:
-      - 10001:10001
-    volumes:
-      - /data/logs/taroco-admin/:/logs/taroco-admin/
-    networks:
-      - taroco
-
-  taroco-monitor:
+  taroco-hystrix-monitor:
     build:
       context: ./
       dockerfile: Dockerfile-monitor
@@ -40,7 +28,7 @@ services:
     ports:
       - 10002:10002
     volumes:
-      - /data/logs/taroco-monitor/:/logs/taroco-monitor/
+      - /data/logs/taroco-hystrix-monitor/:/logs/taroco-hystrix-monitor/
     networks:
       - taroco
 

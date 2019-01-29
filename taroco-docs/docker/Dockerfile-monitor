@@ -1,7 +1,7 @@
 FROM java:8-jre
 MAINTAINER Taroco liuht <liuht777@qq.com>
 
-ADD ./jar/cloud-monitor-*.jar /app/app.jar
+ADD ./jar/taroco-hystrix-monitor-*.jar /app/app.jar
 
 EXPOSE 10002
 

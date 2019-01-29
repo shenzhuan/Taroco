@@ -9,7 +9,7 @@ management:
 
 spring:
   application:
-    name: taroco-monitor
+    name: taroco-hystrix-monitor
   profiles:
     active: dev
 

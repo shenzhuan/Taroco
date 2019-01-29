@@ -1,10 +1,6 @@
 server:
   port: 10000
 
-logging:
-  level:
-    org.springframework.security.oauth2: debug
-
 management:
   endpoints:
     web:
@@ -26,6 +22,7 @@ spring:
         server-addr: 127.0.0.1:8848
       config:
         server-addr: 127.0.0.1:8848
+        file-extension: yml
 
 ---
 spring:
@@ -36,3 +33,4 @@ spring:
         server-addr: taroco-nacos:8848
       config:
         server-addr: taroco-nacos:8848
+        file-extension: yml

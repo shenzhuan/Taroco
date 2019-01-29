@@ -76,7 +76,7 @@ public class PreRequestLogFilter extends ZuulFilter {
         log.setMethod(request.getMethod());
 
         if (StrUtil.containsAnyIgnoreCase(request.getRequestURI(),
-                SecurityConstants.OAUTH_TOKEN_URL, SecurityConstants.MOBILE_TOKEN_URL)) {
+                SecurityConstants.OAUTH_TOKEN_URL)) {
             // 记录登录日志
             log.setType(LogType.Login.name());
             log.setTitle(LogType.Login.name());

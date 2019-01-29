@@ -1,7 +1,6 @@
 package cn.taroco.rbac.admin.controller;
 
 import cn.taroco.common.constants.SecurityConstants;
-import cn.taroco.common.web.Response;
 import cn.taroco.rbac.admin.service.SysUserService;
 import com.google.code.kaptcha.Producer;
 import com.xiaoleilu.hutool.lang.Assert;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -49,19 +47,5 @@ public class ValidateCodeController {
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(image, "JPEG", out);
         IOUtils.closeQuietly(out);
-    }
-
-    /**
-     * 发送手机验证码
-     * 后期要加接口限制
-     *
-     * @param mobile 手机号
-     * @return R
-     */
-    @ResponseBody
-    @GetMapping(SecurityConstants.MOBILE_VALIDATE_CODE_URL_PREFIX + "/{mobile}")
-    public Response createCode(@PathVariable String mobile) {
-        Assert.notEmpty(mobile, "手机号不能为空");
-        return userService.sendSmsCode(mobile);
     }
 }

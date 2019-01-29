@@ -11,7 +11,7 @@
         <module>taroco-docs</module>
         <module>taroco-cloud</module>
         <module>taroco-gateway</module>
-        <module>taroco-oauth2</module>
+        <module>taroco-authentication</module>
         <module>taroco-rbac</module>
     </modules>
     <packaging>pom</packaging>
@@ -54,7 +54,6 @@
         <curator-recipes.version>2.10.0</curator-recipes.version>
         <zookeeper.version>3.4.9</zookeeper.version>
         <swagger.version>2.7.0</swagger.version>
-        <qiniu.version>[7.2.0, 7.2.99]</qiniu.version>
         <kaptcha.version>0.0.9</kaptcha.version>
         <javadoc.version>3.0.0</javadoc.version>
         <mybatis-plus.version>2.1.9</mybatis-plus.version>
@@ -64,6 +63,7 @@
         <jjwt.version>0.9.0</jjwt.version>
         <velocity-engine-core.version>2.0</velocity-engine-core.version>
         <mybatisplus-spring-boot-starter.version>1.0.5</mybatisplus-spring-boot-starter.version>
+        <spring-cloud-zuul-ratelimit.version>2.2.2.RELEASE</spring-cloud-zuul-ratelimit.version>
     </properties>
 
     <dependencyManagement>
@@ -100,11 +100,6 @@
             <dependency>
                 <groupId>cn.taroco</groupId>
                 <artifactId>taroco-swagger2-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.taroco</groupId>
-                <artifactId>oauth2-config</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- spring-boot-admin server -->
@@ -285,6 +280,12 @@
                 <version>${zookeeper.version}</version>
             </dependency>
             <!-- zookeeper end -->
+            <!-- spring-cloud 限流 -->
+            <dependency>
+                <groupId>com.marcosbarbero.cloud</groupId>
+                <artifactId>spring-cloud-zuul-ratelimit</artifactId>
+                <version>${spring-cloud-zuul-ratelimit.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -1,12 +1,24 @@
-# Taroco [演示地址](http://118.190.154.85)
-- [配套前端地址](https://github.com/liuht777/Taroco-UI-NEW)
+# Taroco 
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/liuht777/Taroco)
+[![Total lines](https://tokei.rs/b1/github/liuht777/Taroco?category=lines)](https://github.com/liuht777/Taroco)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license)](https://github.com/liuht777/Taroco/blob/master/LICENSE)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1237f7a17da0481bad1ad1fe0f93b7ea)](https://app.codacy.com/app/liuht777/Taroco?utm_source=github.com&utm_medium=referral&utm_content=liuht777/Taroco&utm_campaign=Badge_Grade_Dashboard)
+
+- [配套前端地址](https://github.com/liuht777/Taroco-UI-NEW)
+- [在线文档](http://118.190.154.85:8080)
+- [演示地址](http://118.190.154.85)
 
 ## 前言
 
-'Taroco' 是一整套的微服务企业级解决方案。是微服务敏捷开发的代表。
+'Taroco' 是一套基于 Spring Cloud 的微服务开发脚手架。具有简单、易用、通用等特点。
+
+
+### 近期开发计划
+
+1. 优化项目结构，主要是做简化操作。删除一下不必要的东西，使脚手架尽量简洁、易用
+2. 计划使用 Nacos 替换 服务发现和配置管理组件
+3. 计划使用 Spring Cloud Gateway 替换 Spring Cloud Zuul
 
 ## 项目介绍
 

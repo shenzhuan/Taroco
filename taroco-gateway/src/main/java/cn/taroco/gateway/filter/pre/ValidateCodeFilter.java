@@ -3,12 +3,9 @@ package cn.taroco.gateway.filter.pre;
 import cn.taroco.common.constants.SecurityConstants;
 import cn.taroco.common.exception.ValidateCodeException;
 import cn.taroco.common.web.Response;
-import cn.taroco.oauth2.config.FilterIgnorePropertiesConfig;
-import cn.taroco.oauth2.config.util.AuthUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.xiaoleilu.hutool.collection.CollUtil;
 import com.xiaoleilu.hutool.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 
 /**
  * 验证码验证
@@ -43,9 +39,6 @@ public class ValidateCodeFilter extends ZuulFilter {
 
     @Autowired
     private RedisTemplate redisTemplate;
-
-    @Autowired
-    private FilterIgnorePropertiesConfig filterIgnorePropertiesConfig;
 
     @Override
     public String filterType() {
@@ -74,21 +67,7 @@ public class ValidateCodeFilter extends ZuulFilter {
         }
 
         // 对指定的请求方法 进行验证码的校验
-        if (!StrUtil.containsAnyIgnoreCase(request.getRequestURI(),
-                SecurityConstants.OAUTH_TOKEN_URL, SecurityConstants.MOBILE_TOKEN_URL)) {
-            return false;
-        }
-
-        try {
-            final String[] clientInfos = AuthUtils.extractAndDecodeHeader(request);
-            if (CollUtil.containsAny(filterIgnorePropertiesConfig.getClients(), Arrays.asList(clientInfos))) {
-                return false;
-            }
-        } catch (IOException e) {
-            log.error("解析终端信息失败", e);
-        }
-
-        return true;
+        return StrUtil.containsAnyIgnoreCase(request.getRequestURI(), SecurityConstants.OAUTH_TOKEN_URL);
     }
 
     @Override

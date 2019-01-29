@@ -12,14 +12,6 @@ spring:
     name: taroco-rbac-service
   profiles:
     active: dev
-  cloud:
-    config:
-      fail-fast: true
-      profile: ${spring.profiles.active}
-      label: master
-      discovery:
-        service-id: taroco-config
-        enabled: true
 
 ---
 spring:
@@ -28,11 +20,15 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
 
 ---
 spring:
   profiles: test
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://taroco-registry:9000/eureka
+  cloud:
+    nacos:
+      discovery:
+        server-addr: taroco-nacos:8848
+      config:
+        server-addr: taroco-nacos:8848

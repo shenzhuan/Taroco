@@ -1,32 +1,34 @@
 server:
   port: 10002
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 spring:
   application:
     name: taroco-monitor
   profiles:
     active: dev
-  cloud:
-    config:
-      fail-fast: true
-      profile: ${spring.profiles.active}
-      label: master
-      discovery:
-        service-id: taroco-config
-        enabled: true
 
 ---
 spring:
   profiles: dev
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:9000/eureka
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
 
 ---
 spring:
   profiles: test
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://taroco-registry:9000/eureka
+  cloud:
+    nacos:
+      discovery:
+        server-addr: taroco-nacos:8848
+      config:
+        server-addr: taroco-nacos:8848

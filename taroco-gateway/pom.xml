@@ -15,6 +15,12 @@
         <dependency>
             <groupId>cn.taroco</groupId>
             <artifactId>taroco-common-spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-jdbc</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>cn.taroco</groupId>

@@ -9,15 +9,13 @@ import cn.taroco.common.web.Response;
 import cn.taroco.rbac.admin.mapper.SysUserMapper;
 import cn.taroco.rbac.admin.model.dto.UserDTO;
 import cn.taroco.rbac.admin.model.dto.UserInfo;
-import cn.taroco.rbac.admin.model.entity.SysDeptRelation;
 import cn.taroco.rbac.admin.model.entity.SysUser;
 import cn.taroco.rbac.admin.model.entity.SysUserRole;
-import cn.taroco.rbac.admin.service.SysDeptRelationService;
 import cn.taroco.rbac.admin.service.SysMenuService;
 import cn.taroco.rbac.admin.service.SysUserRoleService;
 import cn.taroco.rbac.admin.service.SysUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xiaoleilu.hutool.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -53,8 +51,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysUserMapper sysUserMapper;
     @Autowired
     private SysUserRoleService sysUserRoleService;
-    @Autowired
-    private SysDeptRelationService sysDeptRelationService;
 
     @Override
     public UserInfo findUserInfo(UserVO userVo) {
@@ -122,8 +118,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public Page selectWithRolePage(Query query, UserVO userVO) {
-        return (Page) sysUserMapper.selectUserVoPageDataScope(query, userVO.getUsername());
+    public IPage<UserVO> selectPage(Query query, String username) {
+        return sysUserMapper.selectPageVo(query, username);
     }
 
     /**
@@ -233,27 +229,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             userRole.insert();
         });
         return Boolean.TRUE;
-    }
-
-    /**
-     * 获取当前用户的子部门信息
-     *
-     * @param userVO 用户信息
-     * @return 子部门列表
-     */
-    private List<Integer> getChildDepts(UserVO userVO) {
-        UserVO userVo = findUserByUsername(userVO.getUsername());
-        Integer deptId = userVo.getDeptId();
-
-        //获取当前部门的子部门
-        SysDeptRelation deptRelation = new SysDeptRelation();
-        deptRelation.setAncestor(deptId);
-        List<SysDeptRelation> deptRelationList = sysDeptRelationService.list(new QueryWrapper<>(deptRelation));
-        List<Integer> deptIds = new ArrayList<>();
-        for (SysDeptRelation sysDeptRelation : deptRelationList) {
-            deptIds.add(sysDeptRelation.getDescendant());
-        }
-        return deptIds;
     }
 
 }

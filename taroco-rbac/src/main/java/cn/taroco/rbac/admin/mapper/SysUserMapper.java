@@ -1,12 +1,11 @@
 package cn.taroco.rbac.admin.mapper;
 
-import cn.taroco.common.utils.Query;
 import cn.taroco.common.vo.UserVO;
 import cn.taroco.rbac.admin.model.entity.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * <p>
@@ -24,15 +23,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @return userVo
      */
     UserVO selectUserVoByUsername(String username);
-
-    /**
-     * 分页查询用户信息（含角色）
-     *
-     * @param query     查询条件
-     * @param username  用户名
-     * @return list
-     */
-    List selectUserVoPageDataScope(Query query, @Param("username") Object username);
 
     /**
      * 通过手机号查询用户信息（含有角色信息）
@@ -57,4 +47,12 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @return userVo
      */
     UserVO selectUserVoById(Integer id);
+
+    /**
+     *
+     * @param page     分页对象
+     * @param username 用户名称
+     * @return 分页对象
+     */
+    IPage<UserVO> selectPageVo(Page page, @Param("username") String username);
 }

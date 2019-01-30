@@ -1,6 +1,7 @@
 package cn.taroco.common.resolver;
 
 import cn.taroco.common.constants.SecurityConstants;
+import cn.taroco.common.vo.LoginUser;
 import cn.taroco.common.vo.SysRole;
 import cn.taroco.common.vo.UserVO;
 import com.xiaoleilu.hutool.util.StrUtil;
@@ -57,16 +58,16 @@ public class TokenArgumentResolver implements HandlerMethodArgumentResolver {
         } else {
             log.info("resolveArgument username :{} roles:{}", username, roles);
         }
-        UserVO userVO = new UserVO();
-        userVO.setUsername(username);
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUsername(username);
         List<SysRole> sysRoleList = new ArrayList<>();
         Arrays.stream(roles.split(",")).forEach(role -> {
             SysRole sysRole = new SysRole();
             sysRole.setRoleName(role);
             sysRoleList.add(sysRole);
         });
-        userVO.setRoleList(sysRoleList);
-        return userVO;
+        loginUser.setRoleList(sysRoleList);
+        return loginUser;
     }
 
 }

@@ -6,7 +6,7 @@ import cn.taroco.common.web.Response;
 import cn.taroco.rbac.admin.model.dto.UserDTO;
 import cn.taroco.rbac.admin.model.dto.UserInfo;
 import cn.taroco.rbac.admin.model.entity.SysUser;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -26,10 +26,10 @@ public interface SysUserService extends IService<SysUser> {
      * 分页查询用户信息（含有角色信息）
      *
      * @param query 查询条件
-     * @param userVO
+     * @param username 用户名称
      * @return
      */
-    Page selectWithRolePage(Query query, UserVO userVO);
+    IPage<UserVO> selectPage(Query query, String username);
 
     /**
      * 查询用户信息

@@ -110,7 +110,7 @@
            `user`.user_id = #{id}
     </select>
 
-    <select id="selectUserVoPageDataScope" resultMap="userVoResultMap" >
+    <select id="selectPageVo" resultMap="userVoResultMap" >
         SELECT
             `user`.user_id,
             `user`.username,

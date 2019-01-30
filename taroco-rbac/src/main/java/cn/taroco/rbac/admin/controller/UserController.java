@@ -10,7 +10,7 @@ import cn.taroco.rbac.admin.model.dto.UserInfo;
 import cn.taroco.rbac.admin.model.entity.SysUser;
 import cn.taroco.rbac.admin.model.entity.SysUserRole;
 import cn.taroco.rbac.admin.service.SysUserService;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -149,12 +149,11 @@ public class UserController extends BaseController {
      * 分页查询用户
      *
      * @param params 参数集
-     * @param userVO 用户信息
      * @return 用户集合
      */
     @GetMapping("/userPage")
-    public Page userPage(@RequestParam Map<String, Object> params, UserVO userVO) {
-        return userService.selectWithRolePage(new Query(params), userVO);
+    public IPage<UserVO> userPage(@RequestParam Map<String, Object> params) {
+        return userService.selectPage(new Query(params), (String) params.get("username"));
     }
 
     /**

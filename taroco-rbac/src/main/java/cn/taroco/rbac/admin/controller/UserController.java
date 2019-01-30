@@ -5,17 +5,25 @@ import cn.taroco.common.utils.Query;
 import cn.taroco.common.vo.UserVO;
 import cn.taroco.common.web.BaseController;
 import cn.taroco.common.web.Response;
-import cn.taroco.rbac.admin.model.dto.UserInfo;
 import cn.taroco.rbac.admin.model.dto.UserDTO;
+import cn.taroco.rbac.admin.model.dto.UserInfo;
 import cn.taroco.rbac.admin.model.entity.SysUser;
 import cn.taroco.rbac.admin.model.entity.SysUserRole;
 import cn.taroco.rbac.admin.service.SysUserService;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -62,7 +70,7 @@ public class UserController extends BaseController {
      */
     @DeleteMapping("/{id}")
     public Response userDel(@PathVariable Integer id) {
-        SysUser sysUser = userService.selectById(id);
+        SysUser sysUser = userService.getById(id);
         if (CommonConstant.ADMIN_USER_NAME.equals(sysUser.getUsername())) {
             return Response.failure("不允许删除超级管理员");
         }
@@ -81,7 +89,7 @@ public class UserController extends BaseController {
         BeanUtils.copyProperties(userDto, sysUser);
         sysUser.setDelFlag(CommonConstant.STATUS_NORMAL);
         sysUser.setPassword(ENCODER.encode(userDto.getNewpassword1()));
-        userService.insert(sysUser);
+        userService.save(sysUser);
 
         userDto.getRole().forEach(roleId -> {
             SysUserRole userRole = new SysUserRole();
@@ -100,7 +108,7 @@ public class UserController extends BaseController {
      */
     @PutMapping
     public Response userUpdate(@RequestBody UserDTO userDto) {
-        SysUser user = userService.selectById(userDto.getUserId());
+        SysUser user = userService.getById(userDto.getUserId());
         return Response.success(userService.updateUser(userDto, user.getUsername()));
     }
 

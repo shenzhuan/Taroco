@@ -2,7 +2,7 @@ package cn.taroco.rbac.admin.mapper;
 
 
 import cn.taroco.rbac.admin.model.entity.SysRoleMenu;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>

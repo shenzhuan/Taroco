@@ -8,11 +8,18 @@ import cn.taroco.common.utils.Query;
 import cn.taroco.common.web.BaseController;
 import cn.taroco.common.web.Response;
 import cn.taroco.rbac.admin.service.SysLogService;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -40,7 +47,7 @@ public class LogController extends BaseController {
     @GetMapping("/logPage")
     public Page logPage(@RequestParam Map<String, Object> params) {
         params.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
-        return sysLogService.selectPage(new Query<>(params), new EntityWrapper<>());
+        return (Page) sysLogService.page(new Query<>(params), new QueryWrapper<>());
     }
 
     /**
@@ -65,6 +72,6 @@ public class LogController extends BaseController {
         if (result.hasErrors()) {
             throw new ClientException(result.getAllErrors().get(0).getDefaultMessage());
         }
-        sysLogService.insert(log);
+        sysLogService.save(log);
     }
 }

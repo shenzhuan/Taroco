@@ -1,8 +1,8 @@
 package cn.taroco.rbac.admin.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import cn.taroco.rbac.admin.model.entity.SysRole;
 import cn.taroco.common.utils.Query;
+import cn.taroco.rbac.admin.model.entity.SysRole;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 import java.util.Map;

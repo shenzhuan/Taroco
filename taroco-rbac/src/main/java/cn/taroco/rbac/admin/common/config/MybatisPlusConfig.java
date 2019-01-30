@@ -1,10 +1,10 @@
 package cn.taroco.rbac.admin.common.config;
 
-import cn.taroco.common.bean.interceptor.DataScopeInterceptor;
-import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author liuht
@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @MapperScan("cn.taroco.rbac.admin.mapper")
+@EnableTransactionManagement
 public class MybatisPlusConfig {
     /**
      * 分页插件
@@ -21,17 +22,6 @@ public class MybatisPlusConfig {
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
-    }
-
-
-    /**
-     * 数据权限插件
-     *
-     * @return DataScopeInterceptor
-     */
-    @Bean
-    public DataScopeInterceptor dataScopeInterceptor() {
-        return new DataScopeInterceptor();
     }
 
 }

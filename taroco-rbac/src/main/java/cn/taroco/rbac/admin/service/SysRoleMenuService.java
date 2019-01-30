@@ -2,7 +2,7 @@ package cn.taroco.rbac.admin.service;
 
 
 import cn.taroco.rbac.admin.model.entity.SysRoleMenu;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Collection;
 

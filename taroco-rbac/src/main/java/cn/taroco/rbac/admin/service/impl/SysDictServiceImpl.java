@@ -3,7 +3,7 @@ package cn.taroco.rbac.admin.service.impl;
 import cn.taroco.rbac.admin.mapper.SysDictMapper;
 import cn.taroco.rbac.admin.model.entity.SysDict;
 import cn.taroco.rbac.admin.service.SysDictService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

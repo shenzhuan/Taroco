@@ -7,11 +7,19 @@ management:
       exposure:
         include: "*"
 
+
 spring:
   application:
     name: taroco-rbac-service
   profiles:
     active: dev
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  type-aliases-package: cn.taroco.rbac.admin.model.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
 
 ---
 spring:

@@ -3,7 +3,7 @@ package cn.taroco.rbac.admin.service;
 
 import cn.taroco.common.vo.MenuVO;
 import cn.taroco.rbac.admin.model.entity.SysMenu;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 

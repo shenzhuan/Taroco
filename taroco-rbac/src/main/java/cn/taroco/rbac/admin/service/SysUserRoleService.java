@@ -1,7 +1,7 @@
 package cn.taroco.rbac.admin.service;
 
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import cn.taroco.rbac.admin.model.entity.SysUserRole;
 
 /**

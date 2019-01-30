@@ -3,8 +3,7 @@ package cn.taroco.rbac.admin.service.impl;
 import cn.taroco.rbac.admin.mapper.SysRoleMenuMapper;
 import cn.taroco.rbac.admin.model.entity.SysRoleMenu;
 import cn.taroco.rbac.admin.service.SysRoleMenuService;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,9 +22,7 @@ import java.util.List;
 public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRoleMenu> implements SysRoleMenuService {
     @Override
     public Boolean insertRoleMenus(String role, Integer roleId, Collection<Integer> menuIds) {
-        SysRoleMenu condition = new SysRoleMenu();
-        condition.setRoleId(roleId);
-        this.delete(new EntityWrapper<>(condition));
+        this.removeById(roleId);
 
         List<SysRoleMenu> roleMenuList = new ArrayList<>();
         for (Integer menuId : menuIds) {
@@ -34,6 +31,6 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
             roleMenu.setMenuId(menuId);
             roleMenuList.add(roleMenu);
         }
-        return this.insertBatch(roleMenuList);
+        return this.saveBatch(roleMenuList);
     }
 }

@@ -4,7 +4,7 @@ import cn.taroco.common.constants.CommonConstant;
 import cn.taroco.common.entity.SysLog;
 import cn.taroco.rbac.admin.mapper.SysLogMapper;
 import cn.taroco.rbac.admin.service.SysLogService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

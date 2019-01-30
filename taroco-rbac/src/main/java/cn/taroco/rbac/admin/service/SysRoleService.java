@@ -3,9 +3,9 @@ package cn.taroco.rbac.admin.service;
 import cn.taroco.common.utils.Query;
 import cn.taroco.rbac.admin.model.dto.RoleDTO;
 import cn.taroco.rbac.admin.model.entity.SysRole;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public interface SysRoleService extends IService<SysRole> {
      * @param objectEntityWrapper wapper
      * @return page
      */
-    Page selectwithDeptPage(Query<Object> objectQuery, EntityWrapper<Object> objectEntityWrapper);
+    Page selectwithDeptPage(Query objectQuery, QueryWrapper objectEntityWrapper);
 
     /**
      * 更新角色

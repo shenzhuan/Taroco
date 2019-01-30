@@ -1,9 +1,9 @@
 package cn.taroco.rbac.admin.service;
 
 import cn.taroco.rbac.admin.model.dto.DeptTree;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.service.IService;
 import cn.taroco.rbac.admin.model.entity.SysDept;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface SysDeptService extends IService<SysDept> {
      * @param sysDeptEntityWrapper
      * @return 树
      */
-    List<DeptTree> selectListTree(EntityWrapper<SysDept> sysDeptEntityWrapper);
+    List<DeptTree> selectListTree(QueryWrapper<SysDept> sysDeptEntityWrapper);
 
     /**
      * 添加信息部门

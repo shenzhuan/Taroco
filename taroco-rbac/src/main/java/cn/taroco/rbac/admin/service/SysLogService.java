@@ -2,7 +2,7 @@ package cn.taroco.rbac.admin.service;
 
 
 import cn.taroco.common.entity.SysLog;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>

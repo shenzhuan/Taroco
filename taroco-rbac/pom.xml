@@ -46,23 +46,7 @@
 		<!-- mybatis-plus start -->
 		<dependency>
 			<groupId>com.baomidou</groupId>
-			<artifactId>mybatisplus-spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.tomcat</groupId>
-					<artifactId>tomcat-jdbc</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-        <!--mybatis-plus-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-        </dependency>
-		<!--myabtis-plus 代码生成依赖-->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-engine-core</artifactId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
 		</dependency>
 		<!-- kaptcha 验证码生成工具 -->
 		<dependency>

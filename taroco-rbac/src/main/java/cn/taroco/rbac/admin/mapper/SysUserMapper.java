@@ -1,10 +1,9 @@
 package cn.taroco.rbac.admin.mapper;
 
-import cn.taroco.rbac.admin.model.entity.SysUser;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import cn.taroco.common.bean.interceptor.DataScope;
 import cn.taroco.common.utils.Query;
 import cn.taroco.common.vo.UserVO;
+import cn.taroco.rbac.admin.model.entity.SysUser;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -31,10 +30,9 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      *
      * @param query     查询条件
      * @param username  用户名
-     * @param dataScope 数据权限
      * @return list
      */
-    List selectUserVoPageDataScope(Query query, @Param("username") Object username, DataScope dataScope);
+    List selectUserVoPageDataScope(Query query, @Param("username") Object username);
 
     /**
      * 通过手机号查询用户信息（含有角色信息）

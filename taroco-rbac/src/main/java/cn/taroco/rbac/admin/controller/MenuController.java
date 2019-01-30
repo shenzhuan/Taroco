@@ -5,16 +5,30 @@ import cn.taroco.common.constants.SecurityConstants;
 import cn.taroco.common.vo.MenuVO;
 import cn.taroco.common.web.BaseController;
 import cn.taroco.common.web.Response;
-import cn.taroco.rbac.admin.model.dto.MenuTree;
-import cn.taroco.rbac.admin.service.SysMenuService;
 import cn.taroco.rbac.admin.common.util.TreeUtil;
+import cn.taroco.rbac.admin.model.dto.MenuTree;
 import cn.taroco.rbac.admin.model.entity.SysMenu;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import cn.taroco.rbac.admin.service.SysMenuService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author liuht
@@ -69,7 +83,7 @@ public class MenuController extends BaseController {
     public List<MenuTree> getTree() {
         SysMenu condition = new SysMenu();
         condition.setDelFlag(CommonConstant.STATUS_NORMAL);
-        return TreeUtil.bulidTree(sysMenuService.selectList(new EntityWrapper<>(condition)), -1);
+        return TreeUtil.bulidTree(sysMenuService.list(new QueryWrapper<>(condition)), -1);
     }
 
     /**
@@ -96,7 +110,7 @@ public class MenuController extends BaseController {
      */
     @GetMapping("/{id}")
     public SysMenu menu(@PathVariable Integer id) {
-        return sysMenuService.selectById(id);
+        return sysMenuService.getById(id);
     }
 
     /**
@@ -107,7 +121,7 @@ public class MenuController extends BaseController {
      */
     @PostMapping
     public Response menu(@RequestBody SysMenu sysMenu) {
-        return Response.success(sysMenuService.insert(sysMenu));
+        return Response.success(sysMenuService.save(sysMenu));
     }
 
     /**

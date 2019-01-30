@@ -7,7 +7,6 @@ management:
       exposure:
         include: "*"
 
-
 spring:
   application:
     name: taroco-rbac-service
@@ -20,6 +19,9 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true
+logging:
+  level:
+    com.alibaba.nacos: warn
 
 ---
 spring:

@@ -2,6 +2,7 @@ package cn.taroco.rbac.admin.controller;
 
 import cn.taroco.common.constants.CommonConstant;
 import cn.taroco.common.utils.Query;
+import cn.taroco.common.vo.LoginUser;
 import cn.taroco.common.vo.UserVO;
 import cn.taroco.common.web.BaseController;
 import cn.taroco.common.web.Response;
@@ -42,12 +43,15 @@ public class UserController extends BaseController {
      * 获取当前用户信息（角色、权限）
      * 并且异步初始化用户部门信息
      *
-     * @param userVo 当前用户信息
+     * @param loginUser 当前用户信息
      * @return 用户名
      */
     @GetMapping("/info")
-    public Response user(UserVO userVo) {
-        UserInfo userInfo = userService.findUserInfo(userVo);
+    public Response user(LoginUser loginUser) {
+        final UserVO userVO = new UserVO();
+        userVO.setUsername(loginUser.getUsername());
+        userVO.setRoleList(loginUser.getRoleList());
+        UserInfo userInfo = userService.findUserInfo(userVO);
         return Response.success(userInfo);
     }
 

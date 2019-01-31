@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -88,7 +89,7 @@ public class UserController extends BaseController {
      * @return success/false
      */
     @PostMapping
-    public Response user(@RequestBody UserDTO userDto) {
+    public Response user(@Valid @RequestBody UserDTO userDto) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(userDto, sysUser);
         sysUser.setDelFlag(CommonConstant.STATUS_NORMAL);
@@ -111,7 +112,7 @@ public class UserController extends BaseController {
      * @return R
      */
     @PutMapping
-    public Response userUpdate(@RequestBody UserDTO userDto) {
+    public Response userUpdate(@Valid @RequestBody UserDTO userDto) {
         SysUser user = userService.getById(userDto.getUserId());
         return Response.success(userService.updateUser(userDto, user.getUsername()));
     }
@@ -163,12 +164,12 @@ public class UserController extends BaseController {
     /**
      * 修改个人信息
      *
-     * @param userDto userDto
-     * @param userVo  登录用户信息
+     * @param userDto   userDto
+     * @param loginUser 登录用户信息
      * @return success/false
      */
     @PutMapping("/editInfo")
-    public Response editInfo(@RequestBody UserDTO userDto, UserVO userVo) {
-        return userService.updateUserInfo(userDto, userVo.getUsername());
+    public Response editInfo(@Valid @RequestBody UserDTO userDto, LoginUser loginUser) {
+        return userService.updateUserInfo(userDto, loginUser.getUsername());
     }
 }

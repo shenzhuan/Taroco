@@ -13,25 +13,15 @@ spring:
   profiles:
     active: dev
 
-mybatis-plus:
-  mapper-locations: classpath:/mapper/*Mapper.xml
-  type-aliases-package: cn.taroco.rbac.admin.model.entity
-  configuration:
-    map-underscore-to-camel-case: true
-    cache-enabled: true
-logging:
-  level:
-    com.alibaba.nacos: warn
-
 ---
 spring:
   profiles: dev
   cloud:
     nacos:
       discovery:
-        server-addr: 118.190.154.85:8848
+        server-addr: 127.0.0.1:8848
       config:
-        server-addr: 118.190.154.85:8848
+        server-addr: 127.0.0.1:8848
         file-extension: yml
 
 ---

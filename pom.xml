@@ -9,7 +9,6 @@
     <modules>
         <module>taroco-common-starter</module>
         <module>taroco-docs</module>
-        <module>taroco-hystrix-monitor</module>
         <module>taroco-gateway</module>
         <module>taroco-authentication</module>
         <module>taroco-rbac</module>

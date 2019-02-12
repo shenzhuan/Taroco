@@ -3,7 +3,6 @@ package cn.taroco.common.resolver;
 import cn.taroco.common.constants.SecurityConstants;
 import cn.taroco.common.vo.LoginUser;
 import cn.taroco.common.vo.SysRole;
-import cn.taroco.common.vo.UserVO;
 import com.xiaoleilu.hutool.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -34,7 +33,7 @@ public class TokenArgumentResolver implements HandlerMethodArgumentResolver {
      */
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-        return methodParameter.getParameterType().equals(UserVO.class);
+        return methodParameter.getParameterType().equals(LoginUser.class);
     }
 
     /**

@@ -10,7 +10,6 @@ import cn.taroco.rbac.admin.mapper.SysUserMapper;
 import cn.taroco.rbac.admin.model.dto.UserDTO;
 import cn.taroco.rbac.admin.model.dto.UserInfo;
 import cn.taroco.rbac.admin.model.entity.SysUser;
-import cn.taroco.rbac.admin.model.entity.SysUserRole;
 import cn.taroco.rbac.admin.service.SysMenuService;
 import cn.taroco.rbac.admin.service.SysUserRoleService;
 import cn.taroco.rbac.admin.service.SysUserService;
@@ -218,16 +217,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         BeanUtils.copyProperties(userDto, sysUser);
         sysUser.setUpdateTime(new Date());
         this.updateById(sysUser);
-
-        SysUserRole condition = new SysUserRole();
-        condition.setUserId(userDto.getUserId());
-        sysUserRoleService.remove(new QueryWrapper<>(condition));
-        userDto.getRole().forEach(roleId -> {
-            SysUserRole userRole = new SysUserRole();
-            userRole.setUserId(sysUser.getUserId());
-            userRole.setRoleId(roleId);
-            userRole.insert();
-        });
         return Boolean.TRUE;
     }
 

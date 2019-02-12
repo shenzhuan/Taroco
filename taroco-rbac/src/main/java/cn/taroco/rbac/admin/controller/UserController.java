@@ -9,7 +9,6 @@ import cn.taroco.common.web.Response;
 import cn.taroco.rbac.admin.model.dto.UserDTO;
 import cn.taroco.rbac.admin.model.dto.UserInfo;
 import cn.taroco.rbac.admin.model.entity.SysUser;
-import cn.taroco.rbac.admin.model.entity.SysUserRole;
 import cn.taroco.rbac.admin.service.SysUserService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.BeanUtils;
@@ -95,13 +94,6 @@ public class UserController extends BaseController {
         sysUser.setDelFlag(CommonConstant.STATUS_NORMAL);
         sysUser.setPassword(ENCODER.encode(userDto.getNewpassword1()));
         userService.save(sysUser);
-
-        userDto.getRole().forEach(roleId -> {
-            SysUserRole userRole = new SysUserRole();
-            userRole.setUserId(sysUser.getUserId());
-            userRole.setRoleId(roleId);
-            userRole.insert();
-        });
         return Response.success(Boolean.TRUE);
     }
 

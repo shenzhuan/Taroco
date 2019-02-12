@@ -9,14 +9,10 @@ import java.io.Serializable;
  * @author liuht
  * @date 2017/11/11
  * <p>
- * commit('SET_ROLES', data)
- * commit('SET_NAME', data)
- * commit('SET_AVATAR', data)
- * commit('SET_INTRODUCTION', data)
- * commit('SET_PERMISSIONS', data)
  */
 @Data
 public class UserInfo implements Serializable {
+    private static final long serialVersionUID = -4277243538989343400L;
     /**
      * 用户基本信息
      */

@@ -23,6 +23,7 @@ spring:
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yml
+        shared-dataids: application-${spring.profiles}.yml
 
 ---
 spring:
@@ -34,3 +35,4 @@ spring:
       config:
         server-addr: 118.190.154.85:8848
         file-extension: yml
+        shared-dataids: application-${spring.profiles}.yml

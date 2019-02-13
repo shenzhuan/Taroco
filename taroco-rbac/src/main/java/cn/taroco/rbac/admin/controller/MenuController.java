@@ -66,9 +66,7 @@ public class MenuController extends BaseController {
         Arrays.stream(roles.split(",")).forEach(role -> all.addAll(sysMenuService.findMenuByRoleName(role)));
         List<MenuTree> menuTreeList = new ArrayList<>();
         all.forEach(menuVo -> {
-            if (CommonConstant.MENU.equals(menuVo.getType())) {
-                menuTreeList.add(new MenuTree(menuVo));
-            }
+            menuTreeList.add(new MenuTree(menuVo));
         });
         menuTreeList.sort(Comparator.comparing(MenuTree::getSort));
         return TreeUtil.bulid(menuTreeList, -1);
@@ -97,7 +95,7 @@ public class MenuController extends BaseController {
         List<MenuVO> menus = sysMenuService.findMenuByRoleName(roleName);
         List<Integer> menuList = new ArrayList<>();
         for (MenuVO menuVo : menus) {
-            menuList.add(menuVo.getMenuId());
+            menuList.add(menuVo.getId());
         }
         return menuList;
     }

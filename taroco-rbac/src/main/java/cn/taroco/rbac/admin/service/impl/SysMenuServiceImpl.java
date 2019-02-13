@@ -34,7 +34,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     public Boolean deleteMenu(Integer id) {
         // 删除当前节点
         SysMenu condition1 = new SysMenu();
-        condition1.setMenuId(id);
+        condition1.setId(id);
         condition1.setDelFlag(CommonConstant.STATUS_DEL);
         this.updateById(condition1);
 

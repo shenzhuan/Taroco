@@ -1,20 +1,11 @@
 server:
   port: 9000
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
 spring:
   application:
     name: taroco-gateway
   profiles:
     active: dev
-logging:
-  level:
-    com.alibaba.nacos: warn
 
 ---
 spring:

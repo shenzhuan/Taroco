@@ -53,16 +53,6 @@ public interface CommonConstant {
     String STATUS_LOCK = "9";
 
     /**
-     * 菜单
-     */
-    String MENU = "0";
-
-    /**
-     * 按钮
-     */
-    String BUTTON = "1";
-
-    /**
      * 删除标记
      */
     String DEL_FLAG = "del_flag";

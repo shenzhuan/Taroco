@@ -19,23 +19,19 @@ public class MenuVO implements Serializable {
     /**
      * 菜单ID
      */
-    private Integer menuId;
+    private Integer id;
     /**
      * 菜单名称
      */
     private String name;
     /**
-     * 菜单权限标识
+     * 菜单路径
      */
-    private String permission;
+    private String path;
     /**
      * 请求链接
      */
     private String url;
-    /**
-     * 请求方法
-     */
-    private String method;
     /**
      * 父菜单ID
      */
@@ -45,21 +41,9 @@ public class MenuVO implements Serializable {
      */
     private String icon;
     /**
-     * 一个路径
-     */
-    private String path;
-    /**
-     * VUE页面
-     */
-    private String component;
-    /**
      * 排序值
      */
     private Integer sort;
-    /**
-     * 菜单类型 （0菜单 1按钮）
-     */
-    private String type;
     /**
      * 创建时间
      */
@@ -73,24 +57,4 @@ public class MenuVO implements Serializable {
      */
     private String delFlag;
 
-
-    @Override
-    public int hashCode() {
-        return menuId.hashCode();
-    }
-
-    /**
-     * menuId 相同则相同
-     *
-     * @param obj
-     * @return
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof MenuVO) {
-            Integer targetMenuId = ((MenuVO) obj).getMenuId();
-            return menuId.equals(targetMenuId);
-        }
-        return super.equals(obj);
-    }
 }

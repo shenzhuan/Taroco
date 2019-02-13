@@ -2,7 +2,6 @@ package cn.taroco.rbac.admin.service.impl;
 
 import cn.taroco.common.constants.SecurityConstants;
 import cn.taroco.common.utils.Query;
-import cn.taroco.common.vo.MenuVO;
 import cn.taroco.common.vo.SysRole;
 import cn.taroco.common.vo.UserVO;
 import cn.taroco.common.web.Response;
@@ -10,7 +9,6 @@ import cn.taroco.rbac.admin.mapper.SysUserMapper;
 import cn.taroco.rbac.admin.model.dto.UserDTO;
 import cn.taroco.rbac.admin.model.dto.UserInfo;
 import cn.taroco.rbac.admin.model.entity.SysUser;
-import cn.taroco.rbac.admin.service.SysMenuService;
 import cn.taroco.rbac.admin.service.SysUserRoleService;
 import cn.taroco.rbac.admin.service.SysUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -18,7 +16,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xiaoleilu.hutool.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -42,8 +39,6 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
-    @Autowired
-    private SysMenuService sysMenuService;
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
@@ -72,20 +67,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         String[] roles = roleNames.toArray(new String[roleNames.size()]);
         userInfo.setRoles(roles);
 
-        //设置权限列表（menu.permission）
-        Set<MenuVO> menuVoSet = new HashSet<>();
-        for (String role : roles) {
-            List<MenuVO> menuVos = sysMenuService.findMenuByRoleName(role);
-            menuVoSet.addAll(menuVos);
-        }
         Set<String> permissions = new HashSet<>();
-        for (MenuVO menuVo : menuVoSet) {
-            if (StringUtils.isNotEmpty(menuVo.getPermission())) {
-                String permission = menuVo.getPermission();
-                permissions.add(permission);
-            }
+        // TODO 查询用户权限列表
+        if (!CollectionUtils.isEmpty(permissions)) {
+            userInfo.setPermissions(permissions.toArray(new String[permissions.size()]));
         }
-        userInfo.setPermissions(permissions.toArray(new String[permissions.size()]));
+
         return userInfo;
     }
 

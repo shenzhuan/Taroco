@@ -1,20 +1,11 @@
 server:
   port: 9001
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
 spring:
   application:
     name: taroco-authentication-server
   profiles:
     active: dev
-logging:
-  level:
-    com.alibaba.nacos: warn
 
 ---
 spring:

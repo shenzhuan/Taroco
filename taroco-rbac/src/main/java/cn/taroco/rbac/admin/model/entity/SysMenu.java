@@ -29,24 +29,20 @@ public class SysMenu extends Model<SysMenu> {
     /**
      * 菜单ID
      */
-    @TableId(value = "menu_id",type = IdType.INPUT)
-	private Integer menuId;
+    @TableId(value = "id",type = IdType.AUTO)
+	private Integer id;
     /**
      * 菜单名称
      */
 	private String name;
-    /**
-     * 菜单权限标识
-     */
-	private String permission;
+	/**
+	 * 前端URL
+	 */
+	private String path;
     /**
      * 请求链接
      */
 	private String url;
-    /**
-     * 请求方法
-     */
-	private String method;
     /**
      * 父菜单ID
      */
@@ -57,17 +53,9 @@ public class SysMenu extends Model<SysMenu> {
      */
 	private String icon;
     /**
-     * VUE页面
-     */
-	private String component;
-    /**
      * 排序值
      */
 	private Integer sort;
-    /**
-     * 菜单类型 （0菜单 1按钮）
-     */
-	private String type;
     /**
      * 创建时间
      */
@@ -83,33 +71,9 @@ public class SysMenu extends Model<SysMenu> {
      */
 	@TableField("del_flag")
 	private String delFlag;
-	/**
-	 * 前端URL
-	 */
-	private String path;
-
 
 	@Override
 	protected Serializable pkVal() {
-		return this.menuId;
-	}
-
-	@Override
-	public String toString() {
-		return "SysMenu{" +
-			", menuId=" + menuId +
-			", name=" + name +
-			", permission=" + permission +
-			", url=" + url +
-			", method=" + method +
-			", parentId=" + parentId +
-			", icon=" + icon +
-			", component=" + component +
-			", sort=" + sort +
-			", type=" + type +
-			", createTime=" + createTime +
-			", updateTime=" + updateTime +
-			", delFlag=" + delFlag +
-			"}";
+		return this.id;
 	}
 }

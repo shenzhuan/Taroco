@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class RoleDTO extends SysRole {
+    private static final long serialVersionUID = 3218951684339868387L;
     /**
      * 角色部门Id
      */

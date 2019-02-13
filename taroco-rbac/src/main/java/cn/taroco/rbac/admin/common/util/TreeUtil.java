@@ -60,6 +60,7 @@ public class TreeUtil {
             node.setPath(menu.getPath());
             node.setLabel(menu.getName());
             node.setIcon(menu.getIcon());
+            node.setSort(menu.getSort());
             trees.add(node);
         }
         return TreeUtil.bulid(trees, root);

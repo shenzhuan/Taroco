@@ -1,0 +1,32 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: taroco-authentication-server
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        shared-dataids: application-${spring.profiles}.yml
+
+---
+spring:
+  profiles: test
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 118.190.154.85:8848
+      config:
+        server-addr: 118.190.154.85:8848
+        file-extension: yml
+        shared-dataids: application-${spring.profiles}.yml

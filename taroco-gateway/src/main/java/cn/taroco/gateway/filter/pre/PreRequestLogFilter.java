@@ -7,17 +7,13 @@ import cn.taroco.gateway.feign.SysLogService;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.xiaoleilu.hutool.util.StrUtil;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Enumeration;
 
@@ -88,26 +84,10 @@ public class PreRequestLogFilter extends ZuulFilter {
                 // 记录操作日志
                 log.setType(LogType.Operation.name());
                 log.setTitle(LogType.Operation.name());
-                log.setParams(queryBody(request));
                 log.setCreateBy(ctx.getZuulRequestHeaders().get(SecurityConstants.USER_HEADER));
                 logService.add(log);
             }
         }
-    }
-
-    /**
-     * 获取请求body
-     */
-    private String queryBody(HttpServletRequest request) {
-        try {
-            ServletInputStream stream = request.getInputStream();
-            if (stream != null) {
-                return IOUtils.toString(stream, Charset.defaultCharset());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**

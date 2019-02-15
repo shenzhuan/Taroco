@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.taroco.common.swagger2.SwaggerAutoConfiguration

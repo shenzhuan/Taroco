@@ -127,7 +127,6 @@ public class MenuController extends BaseController {
      *
      * @param id 菜单ID
      * @return success/false
-     * TODO  级联删除下级节点
      */
     @DeleteMapping("/{id}")
     public Response menuDel(@PathVariable Integer id) {

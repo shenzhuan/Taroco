@@ -9,6 +9,7 @@ import cn.taroco.rbac.admin.model.entity.SysRoleDept;
 import cn.taroco.rbac.admin.service.SysRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
@@ -50,6 +51,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         roleDept.setDeptId(roleDto.getRoleDeptId());
         sysRoleDeptMapper.insert(roleDept);
         return true;
+    }
+
+    @Override
+    public IPage<RoleDTO> selectPageVo(final Query query, final String roleName) {
+        return sysRoleMapper.selectPageVo(query, roleName);
     }
 
     /**

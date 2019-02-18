@@ -8,8 +8,7 @@ import cn.taroco.rbac.admin.model.dto.RoleDTO;
 import cn.taroco.rbac.admin.model.entity.SysRole;
 import cn.taroco.rbac.admin.service.SysRoleMenuService;
 import cn.taroco.rbac.admin.service.SysRoleService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,7 +79,7 @@ public class RoleController extends BaseController {
     /**
      * 获取角色列表
      *
-     * @param deptId  部门ID
+     * @param deptId 部门ID
      * @return 角色列表
      */
     @GetMapping("/roleList/{deptId}")
@@ -96,8 +95,8 @@ public class RoleController extends BaseController {
      * @return 分页对象
      */
     @GetMapping("/rolePage")
-    public Page rolePage(@RequestParam Map<String, Object> params) {
-        return sysRoleService.selectwithDeptPage(new Query<>(params), new QueryWrapper(params));
+    public IPage<RoleDTO> rolePage(@RequestParam Map<String, Object> params) {
+        return sysRoleService.selectPageVo(new Query<>(params), (String) params.get("roleName"));
     }
 
     /**

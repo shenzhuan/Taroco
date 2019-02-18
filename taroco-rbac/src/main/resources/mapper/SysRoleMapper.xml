@@ -14,7 +14,7 @@
 	</resultMap>
 
 	<!--roleDto-->
-	<resultMap id="RoleDtoMap" type="cn.taroco.rbac.admin.model.dto.RoleDTO">
+	<resultMap id="RoleVoMap" type="cn.taroco.rbac.admin.model.dto.RoleDTO">
 		<id column="role_id" property="roleId" />
 		<result column="role_name" property="roleName" />
 		<result column="role_code" property="roleCode" />
@@ -23,12 +23,14 @@
 		<result column="update_time" property="updateTime" />
 		<result column="del_flag" property="delFlag" />
 		<result column="dept_id" property="roleDeptId"/>
-		<result column="name" property="deptName"/>
+		<result column="dept_name" property="roleDeptName"/>
 	</resultMap>
 
-	<select id="selectRolePage" resultMap="RoleDtoMap">
+	<select id="selectPageVo" resultMap="RoleVoMap">
 		SELECT
-			*
+			r.*,
+			d.dept_id AS dept_id,
+			d.`name` AS dept_name
 		FROM
 			sys_role r
 		LEFT JOIN sys_role_dept rd ON rd.role_id = r.role_id
@@ -39,6 +41,7 @@
         </if>
 		ORDER BY r.role_id ASC
 	</select>
+
 	<select id="selectListByDeptId" resultMap="BaseResultMap">
 		SELECT
 			r.role_id,

@@ -1,7 +1,7 @@
 package cn.taroco.rbac.admin.mapper;
 
+import cn.taroco.common.entity.SysRoute;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import cn.taroco.common.entity.SysZuulRoute;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import cn.taroco.common.entity.SysZuulRoute;
  * @author liuht
  * @since 2018-05-15
  */
-public interface SysZuulRouteMapper extends BaseMapper<SysZuulRoute> {
+public interface SysRouteMapper extends BaseMapper<SysRoute> {
 
 }

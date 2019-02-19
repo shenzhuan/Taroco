@@ -1,11 +1,11 @@
 package cn.taroco.rbac.admin.controller;
 
 import cn.taroco.common.constants.CommonConstant;
-import cn.taroco.common.entity.SysZuulRoute;
+import cn.taroco.common.entity.SysRoute;
 import cn.taroco.common.utils.Query;
 import cn.taroco.common.web.BaseController;
 import cn.taroco.common.web.Response;
-import cn.taroco.rbac.admin.service.SysZuulRouteService;
+import cn.taroco.rbac.admin.service.SysRouteService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +32,18 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/route")
-public class ZuulRouteController extends BaseController {
+public class RouteController extends BaseController {
     @Autowired
-    private SysZuulRouteService sysZuulRouteService;
+    private SysRouteService sysRouteService;
     /**
      * 通过ID查询
      *
      * @param id ID
-     * @return SysZuulRoute
+     * @return SysRoute
      */
     @GetMapping("/{id}")
-    public SysZuulRoute get(@PathVariable Integer id) {
-        return sysZuulRouteService.getById(id);
+    public SysRoute get(@PathVariable Integer id) {
+        return sysRouteService.getById(id);
     }
 
     /**
@@ -54,19 +54,20 @@ public class ZuulRouteController extends BaseController {
      */
     @GetMapping("/page")
     public Page page(@RequestParam Map<String, Object> params) {
-        params.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
-        return (Page) sysZuulRouteService.page(new Query<>(params), new QueryWrapper<>());
+        final QueryWrapper<SysRoute> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
+        return (Page) sysRouteService.page(new Query<>(params), queryWrapper);
     }
 
     /**
      * 添加
      *
-     * @param sysZuulRoute 实体
+     * @param sysRoute 实体
      * @return success/false
      */
     @PostMapping
-    public Response add(@RequestBody SysZuulRoute sysZuulRoute) {
-        return Response.success(sysZuulRouteService.save(sysZuulRoute));
+    public Response add(@RequestBody SysRoute sysRoute) {
+        return Response.success(sysRouteService.save(sysRoute));
     }
 
     /**
@@ -77,23 +78,23 @@ public class ZuulRouteController extends BaseController {
      */
     @DeleteMapping("/{id}")
     public Response delete(@PathVariable Integer id) {
-        SysZuulRoute sysZuulRoute = new SysZuulRoute();
-        sysZuulRoute.setId(id);
-        sysZuulRoute.setUpdateTime(new Date());
-        sysZuulRoute.setDelFlag(CommonConstant.STATUS_DEL);
-        return Response.success(sysZuulRouteService.updateById(sysZuulRoute));
+        SysRoute sysRoute = new SysRoute();
+        sysRoute.setId(id);
+        sysRoute.setUpdateTime(new Date());
+        sysRoute.setDelFlag(CommonConstant.STATUS_DEL);
+        return Response.success(sysRouteService.updateById(sysRoute));
     }
 
     /**
      * 编辑
      *
-     * @param sysZuulRoute 实体
+     * @param sysRoute 实体
      * @return success/false
      */
     @PutMapping
-    public Response edit(@RequestBody SysZuulRoute sysZuulRoute) {
-        sysZuulRoute.setUpdateTime(new Date());
-        return Response.success(sysZuulRouteService.updateById(sysZuulRoute));
+    public Response edit(@RequestBody SysRoute sysRoute) {
+        sysRoute.setUpdateTime(new Date());
+        return Response.success(sysRouteService.updateById(sysRoute));
     }
 
     /**
@@ -103,6 +104,6 @@ public class ZuulRouteController extends BaseController {
      */
     @GetMapping("/apply")
     public Response apply() {
-        return Response.success(sysZuulRouteService.applyZuulRoute());
+        return Response.success(sysRouteService.applyZuulRoute());
     }
 }

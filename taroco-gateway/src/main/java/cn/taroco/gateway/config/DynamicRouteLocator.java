@@ -1,7 +1,7 @@
 package cn.taroco.gateway.config;
 
 import cn.taroco.common.constants.CommonConstant;
-import cn.taroco.common.entity.SysZuulRoute;
+import cn.taroco.common.entity.SysRoute;
 import cn.taroco.common.redis.template.TarocoRedisRepository;
 import com.alibaba.fastjson.JSONArray;
 import com.xiaoleilu.hutool.collection.CollUtil;
@@ -77,8 +77,8 @@ public class DynamicRouteLocator extends DiscoveryClientRouteLocator {
             return routes;
         }
 
-        List<SysZuulRoute> results = JSONArray.parseArray(vals, SysZuulRoute.class);
-        for (SysZuulRoute result : results) {
+        List<SysRoute> results = JSONArray.parseArray(vals, SysRoute.class);
+        for (SysRoute result : results) {
             if (StrUtil.isBlank(result.getPath()) && StrUtil.isBlank(result.getUrl())) {
                 continue;
             }

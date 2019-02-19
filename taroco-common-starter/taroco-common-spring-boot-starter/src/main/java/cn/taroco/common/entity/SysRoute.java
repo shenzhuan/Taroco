@@ -21,8 +21,8 @@ import java.util.Date;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("sys_zuul_route")
-public class SysZuulRoute extends Model<SysZuulRoute> {
+@TableName("sys_route")
+public class SysRoute extends Model<SysRoute> {
 
     private static final long serialVersionUID = 1L;
 

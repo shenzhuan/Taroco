@@ -1,7 +1,7 @@
 package cn.taroco.rbac.admin.service;
 
+import cn.taroco.common.entity.SysRoute;
 import com.baomidou.mybatisplus.extension.service.IService;
-import cn.taroco.common.entity.SysZuulRoute;
 
 /**
  * <p>
@@ -11,7 +11,7 @@ import cn.taroco.common.entity.SysZuulRoute;
  * @author liuht
  * @since 2018-05-15
  */
-public interface SysZuulRouteService extends IService<SysZuulRoute> {
+public interface SysRouteService extends IService<SysRoute> {
 
     /**
      * 立即生效配置

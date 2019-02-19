@@ -1,11 +1,11 @@
 package cn.taroco.rbac.admin.service.impl;
 
 import cn.taroco.common.constants.CommonConstant;
-import cn.taroco.common.entity.SysZuulRoute;
+import cn.taroco.common.entity.SysRoute;
 import cn.taroco.common.redis.template.TarocoRedisRepository;
 import cn.taroco.common.utils.JsonUtils;
-import cn.taroco.rbac.admin.mapper.SysZuulRouteMapper;
-import cn.taroco.rbac.admin.service.SysZuulRouteService;
+import cn.taroco.rbac.admin.mapper.SysRouteMapper;
+import cn.taroco.rbac.admin.service.SysRouteService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2018-05-15
  */
 @Service
-public class SysZuulRouteServiceImpl extends ServiceImpl<SysZuulRouteMapper, SysZuulRoute> implements SysZuulRouteService {
+public class SysRouteServiceImpl extends ServiceImpl<SysRouteMapper, SysRoute> implements SysRouteService {
 
     @Autowired
     private TarocoRedisRepository redisRepository;
@@ -32,9 +32,9 @@ public class SysZuulRouteServiceImpl extends ServiceImpl<SysZuulRouteMapper, Sys
      */
     @Override
     public Boolean applyZuulRoute() {
-        QueryWrapper<SysZuulRoute> wrapper = new QueryWrapper<>();
+        QueryWrapper<SysRoute> wrapper = new QueryWrapper<>();
         wrapper.eq(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
-        List<SysZuulRoute> routeList = list(wrapper);
+        List<SysRoute> routeList = list(wrapper);
         redisRepository.set(CommonConstant.ROUTE_KEY, JsonUtils.toJsonString(routeList));
         return Boolean.TRUE;
     }

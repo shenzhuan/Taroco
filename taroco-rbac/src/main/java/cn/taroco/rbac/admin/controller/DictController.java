@@ -10,6 +10,7 @@ import cn.taroco.rbac.admin.service.SysDictService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,8 +57,13 @@ public class DictController extends BaseController {
      */
     @GetMapping("/dictPage")
     public Page dictPage(@RequestParam Map<String, Object> params) {
-        params.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
-        return (Page) sysDictService.page(new Query<>(params), new QueryWrapper<>());
+        final QueryWrapper<SysDict> query = new QueryWrapper<>();
+        query.eq(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
+        final String typeKey = "type";
+        if (params.containsKey(typeKey) && !ObjectUtils.isEmpty(params.get(typeKey))) {
+            query.like(typeKey, params.get(typeKey));
+        }
+        return (Page) sysDictService.page(new Query<>(params), query);
     }
 
     /**

@@ -102,4 +102,9 @@ public enum DefaultError implements IError {
     public String getErrorMessage() {
         return this.errorMessage;
     }
+
+    @Override
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 }

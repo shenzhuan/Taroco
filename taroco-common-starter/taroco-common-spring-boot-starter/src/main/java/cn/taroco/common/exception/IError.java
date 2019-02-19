@@ -28,4 +28,11 @@ public interface IError {
      * @return 错误信息
      */
     String getErrorMessage();
+
+    /**
+     * 设置错误信息
+     *
+     * @param errorMessage 错误信息
+     */
+    void setErrorMessage(String errorMessage);
 }

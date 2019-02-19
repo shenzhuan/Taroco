@@ -11,5 +11,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class DeptTree extends TreeNode {
+
     private String name;
+
+    private Integer orderNum;
 }

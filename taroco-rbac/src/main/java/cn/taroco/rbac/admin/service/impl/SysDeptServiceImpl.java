@@ -1,13 +1,17 @@
 package cn.taroco.rbac.admin.service.impl;
 
 import cn.taroco.common.constants.CommonConstant;
+import cn.taroco.common.exception.BusinessException;
+import cn.taroco.common.exception.DefaultError;
 import cn.taroco.rbac.admin.common.util.TreeUtil;
 import cn.taroco.rbac.admin.mapper.SysDeptMapper;
 import cn.taroco.rbac.admin.mapper.SysDeptRelationMapper;
 import cn.taroco.rbac.admin.model.dto.DeptTree;
 import cn.taroco.rbac.admin.model.entity.SysDept;
 import cn.taroco.rbac.admin.model.entity.SysDeptRelation;
+import cn.taroco.rbac.admin.model.entity.SysRoleDept;
 import cn.taroco.rbac.admin.service.SysDeptService;
+import cn.taroco.rbac.admin.service.SysRoleDeptService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +33,12 @@ import java.util.List;
 public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements SysDeptService {
     @Autowired
     private SysDeptMapper sysDeptMapper;
+
     @Autowired
     private SysDeptRelationMapper sysDeptRelationMapper;
+
+    @Autowired
+    private SysRoleDeptService sysRoleDeptService;
 
     /**
      * 添加信息部门
@@ -73,6 +81,15 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
      */
     @Override
     public Boolean deleteDeptById(Integer id) {
+        // 删除前判断部门下面是否包含角色
+        final SysRoleDept sysRoleDept = new SysRoleDept();
+        sysRoleDept.setDeptId(id);
+        final int count = sysRoleDeptService.count(new QueryWrapper<>(sysRoleDept));
+        if (count > 0) {
+            final DefaultError error = DefaultError.SERVER_EXCEPTION;
+            error.setErrorMessage("部门下尚存在角色, 不能删除");
+            throw new BusinessException(error);
+        }
         SysDept sysDept = new SysDept();
         sysDept.setDeptId(id);
         sysDept.setUpdateTime(new Date());
@@ -128,6 +145,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
             node.setId(dept.getDeptId());
             node.setParentId(dept.getParentId());
             node.setName(dept.getName());
+            node.setOrderNum(dept.getOrderNum());
             trees.add(node);
         }
         return TreeUtil.bulid(trees, root);

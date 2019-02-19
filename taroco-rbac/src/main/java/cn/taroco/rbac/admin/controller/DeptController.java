@@ -46,9 +46,21 @@ public class DeptController extends BaseController {
 
 
     /**
-     * 返回树形菜单集合
+     * 返回所有部门列表
      *
-     * @return 树形菜单
+     * @return 返回所有部门列表
+     */
+    @GetMapping(value = "/list")
+    public List<SysDept> getAllList() {
+        SysDept condition = new SysDept();
+        condition.setDelFlag(CommonConstant.STATUS_NORMAL);
+        return sysDeptService.list(new QueryWrapper<>(condition));
+    }
+
+    /**
+     * 返回树形部门集合
+     *
+     * @return 树形部门
      */
     @GetMapping(value = "/tree")
     public List<DeptTree> getTree() {
@@ -64,7 +76,7 @@ public class DeptController extends BaseController {
      * @return success/false
      */
     @PostMapping
-    public Boolean add(@RequestBody SysDept  sysDept) {
+    public Boolean add(@RequestBody SysDept sysDept) {
         return sysDeptService.insertDept(sysDept);
     }
 

@@ -1,82 +1,31 @@
 package cn.taroco.common.exception;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * 服务端异常.
  *
  * @author liuht
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class ServerException extends BaseException {
 
-    private IError error;
+    private static final long serialVersionUID = 3076984003548588117L;
+
+    private IError error = DefaultError.SERVER_EXCEPTION;
+
     private String extMessage;
-
-
-    public ServerException() {
-        this.error = DefaultError.SYSTEM_INTERNAL_ERROR;
-        this.extMessage = null;
-    }
 
     public ServerException(String message) {
         super(message);
-        this.error = DefaultError.SYSTEM_INTERNAL_ERROR;
-        this.extMessage = null;
-        this.extMessage = message;
+        this.error.setErrorMessage(message);
     }
 
-    public ServerException(String message, Throwable cause) {
-        super(message, cause);
-        this.error = DefaultError.SYSTEM_INTERNAL_ERROR;
-        this.extMessage = null;
-        this.extMessage = message;
-    }
-
-    public ServerException(Throwable cause) {
-        super(cause);
-        this.error = DefaultError.SYSTEM_INTERNAL_ERROR;
-        this.extMessage = null;
-    }
-
-    public ServerException(IError error) {
-        this.error = DefaultError.SYSTEM_INTERNAL_ERROR;
-        this.extMessage = null;
-        this.error = error;
-    }
-
-    public ServerException(String message, IError error) {
-        super(message);
-        this.error = DefaultError.SYSTEM_INTERNAL_ERROR;
-        this.extMessage = message;
-        this.error = error;
-    }
-
-    public ServerException(String message, Throwable cause, IError error) {
-        super(message, cause);
-        this.error = DefaultError.SYSTEM_INTERNAL_ERROR;
-        this.extMessage = message;
-        this.error = error;
-    }
-
-    public ServerException(Throwable cause, IError error) {
-        super(cause);
-        this.error = DefaultError.SYSTEM_INTERNAL_ERROR;
-        this.extMessage = null;
-        this.error = error;
-    }
-
-    public IError getError() {
-        return this.error;
-    }
-
-    public String getExtMessage() {
-        return this.extMessage;
-    }
-
-    public void setExtMessage(String extMessage) {
+    public ServerException(String message, String extMessage) {
+        super(message + ":" + extMessage);
+        this.error.setErrorMessage(message);
         this.extMessage = extMessage;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + ",ErrorCode : " + this.error.getErrorCode() + ", ErrorMessage : " + this.error.getErrorMessage() + ", ExtMessage : " + this.extMessage;
     }
 }

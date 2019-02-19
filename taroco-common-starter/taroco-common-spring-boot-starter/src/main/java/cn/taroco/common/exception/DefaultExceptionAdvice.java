@@ -85,10 +85,7 @@ public class DefaultExceptionAdvice {
         LOGGER.error("未知异常", ex);
         IError error;
         String extMessage = null;
-        if (ex instanceof BusinessException) {
-            error = ((BusinessException) ex).getError();
-            extMessage = ((BusinessException) ex).getExtMessage();
-        } else if (ex instanceof BindException) {
+        if (ex instanceof BindException) {
             error = DefaultError.INVALID_PARAMETER;
             List<ObjectError> errors = ((BindException) ex).getAllErrors();
             if (errors.size() != 0) {
@@ -180,19 +177,6 @@ public class DefaultExceptionAdvice {
     @ExceptionHandler(ServerException.class)
     public ResponseEntity handleException(ServerException e) {
         Response response = Response.failure(DefaultError.SERVER_EXCEPTION);
-        response.setExtMessage(e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    /**
-     * SystemException 系统异常 一般指系统基础服务产生的异常
-     *
-     * @return ResponseEntity
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(SystemException.class)
-    public ResponseEntity handleException(SystemException e) {
-        Response response = Response.failure(DefaultError.SYSTEM_INTERNAL_ERROR);
         response.setExtMessage(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

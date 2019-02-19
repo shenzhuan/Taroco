@@ -2,16 +2,19 @@ package cn.taroco.common.web;
 
 
 import cn.taroco.common.exception.IError;
+import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * 说明：
+ * 说明：统一 Rest 返回对象
  *
  * @author zhangwei
  * @date 2017年11月18日23:45:05
  */
+@Data
 public class Response implements Serializable {
+
     private static final long serialVersionUID = -5359531292427290394L;
 
     private String errorCode;
@@ -19,14 +22,6 @@ public class Response implements Serializable {
     private String extMessage;
     private Object result;
     private Response.Status status;
-
-    public Response.Status getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(Response.Status status) {
-        this.status = status;
-    }
 
     public Response() {
         this.status = Response.Status.SUCCEED;
@@ -70,51 +65,7 @@ public class Response implements Serializable {
         return response;
     }
 
-    public String getErrorCode() {
-        return this.errorCode;
-    }
-
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getErrorMessage() {
-        return this.errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public String getExtMessage() {
-        return this.extMessage;
-    }
-
-    public void setExtMessage(String extMessage) {
-        this.extMessage = extMessage;
-    }
-
-    public Object getResult() {
-        return result;
-    }
-
-    public void setResult(Object result) {
-        this.result = result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        if (this.errorCode != null) {
-            sb.append("ErrorCode : ").append(this.errorCode).append("ErrorMessage : ").append(this.errorMessage).append("ExtMessage : " + this.extMessage);
-        } else {
-            sb.append("Succeed");
-        }
-
-        return sb.toString();
-    }
-
-    public static enum Status {
+    public enum Status {
         /**
          * 状态
          */

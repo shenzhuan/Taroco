@@ -2,7 +2,6 @@ package cn.taroco.rbac.admin.service.impl;
 
 import cn.taroco.common.constants.CommonConstant;
 import cn.taroco.common.exception.BusinessException;
-import cn.taroco.common.exception.DefaultError;
 import cn.taroco.rbac.admin.common.util.TreeUtil;
 import cn.taroco.rbac.admin.mapper.SysDeptMapper;
 import cn.taroco.rbac.admin.mapper.SysDeptRelationMapper;
@@ -86,9 +85,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         sysRoleDept.setDeptId(id);
         final int count = sysRoleDeptService.count(new QueryWrapper<>(sysRoleDept));
         if (count > 0) {
-            final DefaultError error = DefaultError.SERVER_EXCEPTION;
-            error.setErrorMessage("部门下尚存在角色, 不能删除");
-            throw new BusinessException(error);
+            throw new BusinessException("部门下尚存在角色, 不能删除");
         }
         SysDept sysDept = new SysDept();
         sysDept.setDeptId(id);

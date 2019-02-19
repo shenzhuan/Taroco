@@ -7,6 +7,8 @@ package cn.taroco.common.exception;
  */
 class BaseException extends RuntimeException {
 
+    private static final long serialVersionUID = -2088891163114521095L;
+
     BaseException() {
         super();
     }

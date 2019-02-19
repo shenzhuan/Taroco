@@ -12,71 +12,71 @@ public enum DefaultError implements IError {
     /**
      * 系统内部错误
      */
-    SYSTEM_INTERNAL_ERROR("0000", "System Internal Error"),
+    SYSTEM_INTERNAL_ERROR("0000", "系统错误"),
     /**
      * 无效参数
      */
-    INVALID_PARAMETER("0001", "Invalid Parameter"),
+    INVALID_PARAMETER("0001", "无效参数"),
     /**
      * 服务不存在
      */
-    SERVICE_NOT_FOUND("0002", "Service Not Found"),
+    SERVICE_NOT_FOUND("0002", "服务不存在"),
     /**
      * 参数不全
      */
-    PARAMETER_REQUIRED("0003", "Parameter required"),
+    PARAMETER_REQUIRED("0003", "参数不全"),
     /**
      * 参数过长
      */
-    PARAMETER_MAX_LENGTH("0004", "Parameter max length limit"),
+    PARAMETER_MAX_LENGTH("0004", "参数过长"),
     /**
      * 参数过短
      */
-    PARAMETER_MIN_LENGTH("0005", "Parameter min length limit"),
-    /**
-     * 参数出错
-     */
-    PARAMETER_ANNOTATION_NOT_MATCH("0006", "Parameter annotation not match"),
+    PARAMETER_MIN_LENGTH("0005", "参数过短"),
     /**
      * 参数验证失败
      */
-    PARAMETER_NOT_MATCH_RULE("0007", "Parameter not match validation rule"),
+    PARAMETER_NOT_MATCH_RULE("0007", "参数验证失败"),
     /**
      * 请求方法出错
      */
-    METHOD_NOT_SUPPORTED("0008", "method not supported"),
+    METHOD_NOT_SUPPORTED("0008", "请求方法出错"),
     /**
      * 不支持的content类型
      */
-    CONTENT_TYPE_NOT_SUPPORT("0009", "content type is not support"),
+    CONTENT_TYPE_NOT_SUPPORT("0009", "不支持的content类型"),
     /**
      * json格式化出错
      */
-    JSON_FORMAT_ERROR("0010", "json format error"),
+    JSON_FORMAT_ERROR("0010", "json格式化出错"),
     /**
      * 远程调用出错
      */
-    CALL_REMOTE_ERROR("0011", "call remote error"),
+    CALL_REMOTE_ERROR("0011", "远程调用出错"),
     /**
      * 服务运行SQLException异常
      */
-    SQL_EXCEPTION("0012", "sql exception"),
+    SQL_EXCEPTION("0012", "服务运行SQL异常"),
     /**
      * 客户端异常 给调用者 app,移动端调用
      */
-    CLIENT_EXCEPTION("0013", "client exception"),
+    CLIENT_EXCEPTION("0013", "客户端异常"),
     /**
      * 服务端异常, 微服务服务端产生的异常
      */
-    SERVER_EXCEPTION("0014", "server exception"),
+    SERVER_EXCEPTION("0014", "服务端异常"),
     /**
      * 授权失败 禁止访问
      */
-    ACCESS_DENIED("0015", "access denied"),
+    ACCESS_DENIED("0015", "没有访问权限"),
     /**
      * 演示环境 没有权限访问
      */
     SHOW_AUTH_CONTROL("0016", "演示环境,没有权限访问"),
+    /**
+     * 业务异常
+     */
+    BUSINESS_ERROR("0017", "业务异常")
     ;
 
     String errorCode;

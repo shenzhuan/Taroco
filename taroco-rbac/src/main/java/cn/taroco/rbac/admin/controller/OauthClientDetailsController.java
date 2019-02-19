@@ -5,7 +5,6 @@ import cn.taroco.common.web.BaseController;
 import cn.taroco.common.web.Response;
 import cn.taroco.rbac.admin.model.entity.SysOauthClientDetails;
 import cn.taroco.rbac.admin.service.SysOauthClientDetailsService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -59,7 +58,7 @@ public class OauthClientDetailsController extends BaseController {
      */
     @GetMapping("/page")
     public Page page(@RequestParam Map<String, Object> params) {
-        return (Page) sysOauthClientDetailsService.page(new Query<>(params), new QueryWrapper<>());
+        return (Page) sysOauthClientDetailsService.page(new Query<>(params));
     }
 
     /**

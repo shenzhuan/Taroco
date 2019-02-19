@@ -21,5 +21,5 @@ public class RoleDTO extends SysRole {
     /**
      * 部门名称
      */
-    private String deptName;
+    private String roleDeptName;
 }

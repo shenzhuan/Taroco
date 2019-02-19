@@ -4,6 +4,7 @@ import cn.taroco.common.utils.Query;
 import cn.taroco.rbac.admin.model.dto.RoleDTO;
 import cn.taroco.rbac.admin.model.entity.SysRole;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -26,6 +27,15 @@ public interface SysRoleService extends IService<SysRole> {
      * @return 成功、失败
      */
     Boolean insertRole(RoleDTO roleDto);
+
+    /**
+     * 分页查询用户信息（含有角色信息）
+     *
+     * @param query 查询条件
+     * @param roleName 角色名称
+     * @return
+     */
+    IPage<RoleDTO> selectPageVo(Query query, String roleName);
 
     /**
      * 分页查角色列表

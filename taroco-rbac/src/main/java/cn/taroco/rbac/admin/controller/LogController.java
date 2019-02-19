@@ -11,6 +11,7 @@ import cn.taroco.rbac.admin.service.SysLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,8 +47,13 @@ public class LogController extends BaseController {
      */
     @GetMapping("/logPage")
     public Page logPage(@RequestParam Map<String, Object> params) {
-        params.put(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
-        return (Page) sysLogService.page(new Query<>(params), new QueryWrapper<>());
+        final QueryWrapper<SysLog> query = new QueryWrapper<>();
+        query.eq(CommonConstant.DEL_FLAG, CommonConstant.STATUS_NORMAL);
+        final String typeKey = "type";
+        if (params.containsKey(typeKey) && !ObjectUtils.isEmpty(params.get(typeKey))) {
+            query.eq(typeKey, params.get(typeKey));
+        }
+        return (Page) sysLogService.page(new Query<>(params), query);
     }
 
     /**

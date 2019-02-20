@@ -8,9 +8,6 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 /**
- * <p>
- *
- * </p>
  *
  * @author liuht
  * @since 2018-01-22

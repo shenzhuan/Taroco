@@ -4,9 +4,12 @@ import cn.taroco.common.constants.CommonConstant;
 import cn.taroco.common.utils.Query;
 import cn.taroco.common.web.BaseController;
 import cn.taroco.common.web.Response;
+import cn.taroco.rbac.admin.model.condition.SysRoleMenuSet;
+import cn.taroco.rbac.admin.model.condition.SysRolePermissionSet;
 import cn.taroco.rbac.admin.model.dto.RoleDTO;
 import cn.taroco.rbac.admin.model.entity.SysRole;
 import cn.taroco.rbac.admin.service.SysRoleMenuService;
+import cn.taroco.rbac.admin.service.SysRolePermissionService;
 import cn.taroco.rbac.admin.service.SysRoleService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -27,14 +31,18 @@ import java.util.Map;
  * @author liuht
  * @date 2017/11/5
  */
-@SuppressWarnings("unchecked")
 @RestController
 @RequestMapping("/role")
 public class RoleController extends BaseController {
+
     @Autowired
     private SysRoleService sysRoleService;
+
     @Autowired
     private SysRoleMenuService sysRoleMenuService;
+
+    @Autowired
+    private SysRolePermissionService sysRolePermissionService;
 
     /**
      * 通过ID查询角色信息
@@ -105,10 +113,18 @@ public class RoleController extends BaseController {
      * @return success、false
      */
     @PutMapping("/roleMenuUpd")
-    public Response roleMenuUpd(@RequestBody Map data) {
-        final Integer roleId = Integer.valueOf(data.get("roleId") + "");
-        final List<Integer> menuIds = (List<Integer>) data.get("menuIds");
-        SysRole sysRole = sysRoleService.getById(roleId);
-        return Response.success(sysRoleMenuService.insertRoleMenus(sysRole.getRoleCode(), roleId, menuIds));
+    public Response roleMenuUpd(@Valid @RequestBody SysRoleMenuSet menuSet) {
+        return Response.success(sysRoleMenuService.insertRoleMenus(menuSet.getRoleId(), menuSet.getMenuIds()));
+    }
+
+    /**
+     * 更新角色权限
+     *
+     * @return success、false
+     */
+    @PutMapping("/permissions")
+    public Response rolePermissions(@Valid @RequestBody SysRolePermissionSet permissionSet) {
+        return Response.success(sysRolePermissionService.insertRolePermissions(
+                permissionSet.getRoleId(), permissionSet.getPermissionIds()));
     }
 }

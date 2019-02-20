@@ -12,6 +12,7 @@ import java.io.Serializable;
  */
 @Data
 public class UserInfo implements Serializable {
+
     private static final long serialVersionUID = -4277243538989343400L;
     /**
      * 用户基本信息

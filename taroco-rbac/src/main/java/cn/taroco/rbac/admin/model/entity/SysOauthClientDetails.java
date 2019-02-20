@@ -9,9 +9,6 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
 
 /**
- * <p>
- *
- * </p>
  *
  * @author liuht
  * @since 2018-05-15

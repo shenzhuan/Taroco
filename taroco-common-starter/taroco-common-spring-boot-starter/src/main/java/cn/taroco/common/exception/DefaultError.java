@@ -16,7 +16,7 @@ public enum DefaultError implements IError {
     /**
      * 无效参数
      */
-    INVALID_PARAMETER("0001", "无效参数"),
+    INVALID_PARAMETER("0001", "参数验证失败"),
     /**
      * 服务不存在
      */
@@ -33,10 +33,6 @@ public enum DefaultError implements IError {
      * 参数过短
      */
     PARAMETER_MIN_LENGTH("0005", "参数过短"),
-    /**
-     * 参数验证失败
-     */
-    PARAMETER_NOT_MATCH_RULE("0007", "参数验证失败"),
     /**
      * 请求方法出错
      */

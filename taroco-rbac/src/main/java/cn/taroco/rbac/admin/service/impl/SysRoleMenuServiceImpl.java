@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRoleMenu> implements SysRoleMenuService {
     @Override
-    public Boolean insertRoleMenus(String role, Integer roleId, Collection<Integer> menuIds) {
+    public Boolean insertRoleMenus(Integer roleId, Collection<Integer> menuIds) {
         this.removeById(roleId);
 
         List<SysRoleMenu> roleMenuList = new ArrayList<>();

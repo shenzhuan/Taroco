@@ -20,10 +20,9 @@ public interface SysRoleMenuService extends IService<SysRoleMenu> {
      * 更新角色菜单
      *
      *
-     * @param role
      * @param roleId  角色
      * @param menuIds 菜单列表
      * @return
      */
-    Boolean insertRoleMenus(String role, Integer roleId, Collection<Integer> menuIds);
+    Boolean insertRoleMenus(Integer roleId, Collection<Integer> menuIds);
 }

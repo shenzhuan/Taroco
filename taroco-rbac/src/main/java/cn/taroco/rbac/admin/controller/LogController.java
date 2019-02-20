@@ -3,7 +3,7 @@ package cn.taroco.rbac.admin.controller;
 
 import cn.taroco.common.constants.CommonConstant;
 import cn.taroco.common.entity.SysLog;
-import cn.taroco.common.exception.ClientException;
+import cn.taroco.common.exception.InvalidParamException;
 import cn.taroco.common.utils.Query;
 import cn.taroco.common.web.BaseController;
 import cn.taroco.common.web.Response;
@@ -76,7 +76,7 @@ public class LogController extends BaseController {
     @PostMapping
     public void add(@Valid @RequestBody SysLog log, BindingResult result) {
         if (result.hasErrors()) {
-            throw new ClientException(result.getAllErrors().get(0).getDefaultMessage());
+            throw new InvalidParamException(result.getAllErrors().get(0).getDefaultMessage());
         }
         sysLogService.save(log);
     }

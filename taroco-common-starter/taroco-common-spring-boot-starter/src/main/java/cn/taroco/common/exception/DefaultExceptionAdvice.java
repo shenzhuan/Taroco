@@ -103,7 +103,7 @@ public class DefaultExceptionAdvice {
             error = DefaultError.INVALID_PARAMETER;
             extMessage = ex.getMessage();
         } else if (ex instanceof ConstraintViolationException) {
-            error = DefaultError.PARAMETER_NOT_MATCH_RULE;
+            error = DefaultError.INVALID_PARAMETER;
             Set<ConstraintViolation<?>> violations = ((ConstraintViolationException) ex).getConstraintViolations();
             final StringBuilder msg = new StringBuilder();
             for (ConstraintViolation<?> constraintViolation : violations) {
@@ -117,7 +117,7 @@ public class DefaultExceptionAdvice {
             error = DefaultError.INVALID_PARAMETER;
             extMessage = ex.getMessage();
         } else if (ex instanceof MethodArgumentNotValidException) {
-            error = DefaultError.PARAMETER_NOT_MATCH_RULE;
+            error = DefaultError.INVALID_PARAMETER;
             final BindingResult result = ((MethodArgumentNotValidException) ex).getBindingResult();
             if (result.hasErrors()) {
                 extMessage = result.getAllErrors().get(0).getDefaultMessage();
@@ -151,6 +151,19 @@ public class DefaultExceptionAdvice {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity handleException(BusinessException e) {
         LOGGER.error("业务异常", e);
+        Response response = Response.failure(e.getError());
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * InvalidParamException 参数校验异常
+     *
+     * @return ResponseEntity
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(InvalidParamException.class)
+    public ResponseEntity handleException(InvalidParamException e) {
+        LOGGER.error("参数验证失败", e);
         Response response = Response.failure(e.getError());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

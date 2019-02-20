@@ -9,6 +9,7 @@ import cn.taroco.rbac.admin.mapper.SysUserMapper;
 import cn.taroco.rbac.admin.model.dto.UserDTO;
 import cn.taroco.rbac.admin.model.dto.UserInfo;
 import cn.taroco.rbac.admin.model.entity.SysUser;
+import cn.taroco.rbac.admin.service.SysRolePermissionService;
 import cn.taroco.rbac.admin.service.SysUserRoleService;
 import cn.taroco.rbac.admin.service.SysUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -38,13 +39,20 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
+
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
+
     @Autowired
     private RedisTemplate redisTemplate;
+
     @Autowired
     private SysUserMapper sysUserMapper;
+
     @Autowired
     private SysUserRoleService sysUserRoleService;
+
+    @Autowired
+    private SysRolePermissionService sysRolePermissionService;
 
     @Override
     public UserInfo findUserInfo(UserVO userVo) {
@@ -68,7 +76,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         userInfo.setRoles(roles);
 
         Set<String> permissions = new HashSet<>();
-        // TODO 查询用户权限列表
+        roleList.forEach(role -> permissions.addAll(sysRolePermissionService.getRolePermissions(role.getRoleId())));
         if (!CollectionUtils.isEmpty(permissions)) {
             userInfo.setPermissions(permissions.toArray(new String[permissions.size()]));
         }

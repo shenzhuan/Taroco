@@ -35,7 +35,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController {
+
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
+
     @Autowired
     private SysUserService userService;
 

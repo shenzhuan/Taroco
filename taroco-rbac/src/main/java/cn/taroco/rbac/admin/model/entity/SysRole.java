@@ -12,9 +12,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
- * <p>
- * </p>
  *
  * @author liuht
  * @since 2017-10-29

@@ -11,7 +11,7 @@ services:
       - /data/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: taroco@1234
-      MYSQL_DATABASE: taroco-oauth2
+      MYSQL_DATABASE: mallcloud
     networks:
       - taroco
 

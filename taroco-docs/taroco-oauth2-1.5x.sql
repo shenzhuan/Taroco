@@ -4,7 +4,7 @@ Navicat MySQL Data Transfer
 Source Server         : taroco-mysql
 Source Server Version : 50723
 Source Host           : 111.231.192.110:3306
-Source Database       : taroco-oauth2
+Source Database       : mallcloud
 
 Target Server Type    : MYSQL
 Target Server Version : 50723

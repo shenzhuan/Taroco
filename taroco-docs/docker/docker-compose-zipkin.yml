@@ -11,7 +11,7 @@ services:
       # SpanStore implementation: one of mem, mysql, cassandra, elasticsearch
       - STORAGE_TYPE=mysql
       # The database to use. Defaults to "zipkin".
-      - MYSQL_DB=taroco-oauth2
+      - MYSQL_DB=mallcloud
       # Point the zipkin at the storage backend
       - MYSQL_HOST=taroco-mysql
       # Defaults to 3306
@@ -40,7 +40,7 @@ services:
       # SpanStore implementation: one of mem, mysql, cassandra, elasticsearch
       - STORAGE_TYPE=mysql
       # The database to use. Defaults to "zipkin".
-      - MYSQL_DB=taroco-oauth2
+      - MYSQL_DB=mallcloud
       # Point the zipkin at the storage backend
       - MYSQL_HOST=taroco-mysql
       # Defaults to 3306

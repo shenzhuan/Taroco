@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/liuht777/Taroco-Config
+          uri: https://github.com/shenzhuan/Taroco-Config
           search-paths: config-dev, config-test
           default-label: master
 

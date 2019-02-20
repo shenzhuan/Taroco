@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本机root
-Source Server Version : 50716
+Source Server         : mysql
+Source Server Version : 50520
 Source Host           : localhost:3306
 Source Database       : mallcloud
 
 Target Server Type    : MYSQL
-Target Server Version : 50716
+Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2018-09-27 17:22:01
+Date: 2019-02-20 23:36:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,8 +23,8 @@ CREATE TABLE `sys_dept` (
   `dept_id` int(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL COMMENT '部门名称',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   `del_flag` char(1) DEFAULT '0' COMMENT '是否删除  -1：已删除  0：正常',
   `parent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`dept_id`)
@@ -71,7 +71,7 @@ CREATE TABLE `sys_dict` (
   `description` varchar(100) NOT NULL COMMENT '描述',
   `sort` decimal(10,0) NOT NULL COMMENT '排序（升序）',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
   `remarks` varchar(255) DEFAULT NULL COMMENT '备注信息',
   `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`),
@@ -94,7 +94,7 @@ CREATE TABLE `sys_log` (
   `title` varchar(255) DEFAULT '' COMMENT '日志标题',
   `service_id` varchar(32) DEFAULT NULL COMMENT '服务ID',
   `create_by` varchar(64) DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remote_addr` varchar(255) DEFAULT NULL COMMENT '操作IP地址',
   `user_agent` varchar(1000) DEFAULT NULL COMMENT '用户代理',
@@ -131,8 +131,8 @@ CREATE TABLE `sys_menu` (
   `component` varchar(64) DEFAULT NULL COMMENT 'VUE页面',
   `sort` int(11) DEFAULT '1' COMMENT '排序值',
   `type` char(1) DEFAULT NULL COMMENT '菜单类型 （0菜单 1按钮）',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
   `del_flag` char(1) DEFAULT '0' COMMENT '0--正常 1--删除',
   PRIMARY KEY (`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单权限表';
@@ -214,28 +214,6 @@ CREATE TABLE `sys_oauth_client_details` (
 INSERT INTO `sys_oauth_client_details` VALUES ('sso-demo1', null, '$2a$10$pgzIKH1c2/7jS2eYk0bK9OnShYXvWiZXd3firLJkaF2q9Ct.WVtSe', 'read,write', 'password,refresh_token,authorization_code', '', null, null, null, null, 'true');
 INSERT INTO `sys_oauth_client_details` VALUES ('sso-demo2', '', '$2a$10$0fl9mlBjfg0E48Thhe73Sekw0qdR9OTvXLl3nn8isgwc1LnDyuSD2', 'read,write', 'password,refresh_token,authorization_code', '', '', null, null, null, 'true');
 INSERT INTO `sys_oauth_client_details` VALUES ('taroco', null, '$2a$10$drYsSntNKIr.cCiAQip0uOp5VtZl2FWZ4WvNYgLcMb19ri66mVzRS', 'server', 'password,refresh_token,authorization_code', null, null, null, null, null, 'false');
-
--- ----------------------------
--- Table structure for sys_role
--- ----------------------------
-DROP TABLE IF EXISTS `sys_role`;
-CREATE TABLE `sys_role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(64) COLLATE utf8mb4_bin NOT NULL,
-  `role_code` varchar(64) COLLATE utf8mb4_bin NOT NULL,
-  `role_desc` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `del_flag` char(1) COLLATE utf8mb4_bin DEFAULT '0' COMMENT '删除标识（0-正常,1-删除）',
-  PRIMARY KEY (`role_id`),
-  UNIQUE KEY `role_idx1_role_code` (`role_code`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
--- ----------------------------
--- Records of sys_role
--- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', 'admin', 'ROLE_ADMIN', '超级管理员', '2017-10-29 15:45:51', '2018-08-09 08:51:09', '0');
-INSERT INTO `sys_role` VALUES ('14', 'demo', 'demo', 'demo用户', '2018-04-20 07:14:32', '2018-04-21 23:35:22', '1');
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -330,74 +308,3 @@ INSERT INTO `sys_role_menu` VALUES ('14', '41');
 INSERT INTO `sys_role_menu` VALUES ('14', '51');
 INSERT INTO `sys_role_menu` VALUES ('14', '61');
 INSERT INTO `sys_role_menu` VALUES ('14', '71');
-
--- ----------------------------
--- Table structure for sys_user
--- ----------------------------
-DROP TABLE IF EXISTS `sys_user`;
-CREATE TABLE `sys_user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `username` varchar(64) COLLATE utf8mb4_bin NOT NULL COMMENT '用户名',
-  `password` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `salt` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '随机盐',
-  `phone` varchar(20) COLLATE utf8mb4_bin NOT NULL COMMENT '简介',
-  `avatar` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像',
-  `label` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `dept_id` int(11) DEFAULT NULL COMMENT '部门ID',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `del_flag` char(1) COLLATE utf8mb4_bin DEFAULT '0' COMMENT '0-正常，1-删除',
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `user_idx1_username` (`username`) USING BTREE,
-  UNIQUE KEY `user_idx2_phone` (`phone`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='用户表';
-
--- ----------------------------
--- Records of sys_user
--- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '$2a$10$vg5QNHhCknAqevx9vM2s5esllJEzF/pa8VZXtFYHhhOhUcCw/GWyS', null, '17034642111', null, 'admin,super', '10', '2018-04-20 07:15:18', '2018-08-31 09:28:33', '0');
-
--- ----------------------------
--- Table structure for sys_user_role
--- ----------------------------
-DROP TABLE IF EXISTS `sys_user_role`;
-CREATE TABLE `sys_user_role` (
-  `user_id` int(11) NOT NULL COMMENT '用户ID',
-  `role_id` int(11) NOT NULL COMMENT '角色ID',
-  PRIMARY KEY (`user_id`,`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色表';
-
--- ----------------------------
--- Records of sys_user_role
--- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('1', '1');
-
--- ----------------------------
--- Table structure for sys_zuul_route
--- ----------------------------
-DROP TABLE IF EXISTS `sys_zuul_route`;
-CREATE TABLE `sys_zuul_route` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'router Id',
-  `path` varchar(255) NOT NULL COMMENT '路由路径',
-  `service_id` varchar(255) NOT NULL COMMENT '服务名称',
-  `url` varchar(255) DEFAULT NULL COMMENT 'url代理',
-  `strip_prefix` char(1) DEFAULT '1' COMMENT '转发去掉前缀',
-  `retryable` char(1) DEFAULT '1' COMMENT '是否重试',
-  `enabled` char(1) DEFAULT '1' COMMENT '是否启用',
-  `sensitiveHeaders_list` varchar(255) DEFAULT NULL COMMENT '敏感请求头',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `del_flag` char(1) DEFAULT '0' COMMENT '删除标识（0-正常,1-删除）',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='动态路由配置表';
-
--- ----------------------------
--- Records of sys_zuul_route
--- ----------------------------
-INSERT INTO `sys_zuul_route` VALUES ('3', '/taroco-admin/**', 'taroco-admin', '', '1', '1', '1', '', '2018-05-17 14:09:06', '2018-08-02 08:31:06', '0');
-INSERT INTO `sys_zuul_route` VALUES ('4', '/admin/**', 'taroco-rbac-service', '', '1', '1', '1', '', '2018-05-21 11:40:38', '2018-08-20 17:36:08', '0');
-INSERT INTO `sys_zuul_route` VALUES ('5', '/auth/**', 'taroco-authentication-server', '', '1', '1', '1', '', '2018-05-21 11:41:08', '2018-08-02 08:31:34', '0');
-INSERT INTO `sys_zuul_route` VALUES ('6', '/taroco-registry/**', 'taroco-registry', '', '1', '1', '1', '', '2018-05-21 11:41:08', '2018-08-02 08:32:09', '0');
-INSERT INTO `sys_zuul_route` VALUES ('7', '/taroco-monitor/**', 'taroco-monitor', '', '1', '1', '1', '', '2018-05-21 11:41:08', '2018-08-02 08:32:09', '0');
-INSERT INTO `sys_zuul_route` VALUES ('8', '/taroco-config/**', 'taroco-config', null, '1', '1', '1', null, '2018-08-06 03:36:21', '2018-08-06 11:36:16', '0');
-INSERT INTO `sys_zuul_route` VALUES ('9', '/taroco-demo1/**', 'taroco-demo1', '', '1', '1', '1', '', '2018-08-10 02:29:13', '2018-08-10 14:24:44', '1');

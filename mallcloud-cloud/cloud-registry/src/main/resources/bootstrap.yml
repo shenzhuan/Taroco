@@ -7,6 +7,7 @@ server:
 # 在默认设置下，该服务注册中心也会将自己作为客户端来尝试注册它自己，所以我们需要禁用它的客户端注册行为
 eureka:
   client:
+    register-with-eureka : false
     # 表示是否从Eureka Server获取注册信息，默认为true。因为这是一个单点的Eureka Server，不需要同步其他的Eureka Server节点的数据，故而设为false。
     fetch-registry: false
     serviceUrl:

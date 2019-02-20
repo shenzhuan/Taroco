@@ -1,7 +1,7 @@
 #!/bin/bash
-echo -- -- begin init taroco eureka... -- --
+echo -- -- begin init mallcloud eureka... -- --
 
-COMPOSE_FILE=./taroco-docs/docker/docker-compose-zipkin.yml
+COMPOSE_FILE=./mallcloud-docs/docker/docker-compose-zipkin.yml
 
 echo -- -- stop and remove old docker-compose containers -- --
 if docker-compose -f ${COMPOSE_FILE} ps

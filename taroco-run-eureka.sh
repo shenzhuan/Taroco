@@ -1,8 +1,8 @@
 #!/bin/bash
-echo -- -- begin init taroco eureka... -- --
+echo -- -- begin init mallcloud eureka... -- --
 
-COMPOSE_FILE=./taroco-docs/docker/docker-compose-eureka.yml
-JAR_DIR=./taroco-docs/docker/jar
+COMPOSE_FILE=./mallcloud-docs/docker/docker-compose-eureka.yml
+JAR_DIR=./mallcloud-docs/docker/jar
 
 echo -- -- stop and remove old docker-compose containers -- --
 if docker-compose -f ${COMPOSE_FILE} ps
@@ -12,7 +12,7 @@ if docker-compose -f ${COMPOSE_FILE} ps
 fi
 
 echo -- -- building jar -- --
-cd taroco-cloud
+cd mallcloud-cloud
 mvn clean package -Dmaven.test.skip=true -pl cloud-registry,cloud-config -am
 cd ..
 
@@ -24,8 +24,8 @@ fi
 rm -rf ${JAR_DIR}/cloud-registry*.jar
 rm -rf ${JAR_DIR}/cloud-config*.jar
 
-cp ./taroco-cloud/cloud-registry/target/cloud-registry*.jar ${JAR_DIR}
-cp ./taroco-cloud/cloud-config/target/cloud-config*.jar ${JAR_DIR}
+cp ./mallcloud-cloud/cloud-registry/target/cloud-registry*.jar ${JAR_DIR}
+cp ./mallcloud-cloud/cloud-config/target/cloud-config*.jar ${JAR_DIR}
 
 echo -- -- run docker-compose up -- --
 docker-compose -f ${COMPOSE_FILE} up -d --build

@@ -1,17 +1,17 @@
-# Taroco 
+# Mallcloud 
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/liuht777/Taroco)
-[![Total lines](https://tokei.rs/b1/github/liuht777/Taroco?category=lines)](https://github.com/liuht777/Taroco)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license)](https://github.com/liuht777/Taroco/blob/master/LICENSE)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1237f7a17da0481bad1ad1fe0f93b7ea)](https://app.codacy.com/app/liuht777/Taroco?utm_source=github.com&utm_medium=referral&utm_content=liuht777/Taroco&utm_campaign=Badge_Grade_Dashboard)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/liuht777/Mallcloud)
+[![Total lines](https://tokei.rs/b1/github/liuht777/Mallcloud?category=lines)](https://github.com/liuht777/Mallcloud)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license)](https://github.com/liuht777/Mallcloud/blob/master/LICENSE)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1237f7a17da0481bad1ad1fe0f93b7ea)](https://app.codacy.com/app/liuht777/Mallcloud?utm_source=github.com&utm_medium=referral&utm_content=liuht777/Mallcloud&utm_campaign=Badge_Grade_Dashboard)
 
-- [配套前端地址](https://github.com/liuht777/Taroco-UI-NEW)
+- [配套前端地址](https://github.com/liuht777/Mallcloud-UI-NEW)
 - [在线文档](http://118.190.154.85:8080)
 - [演示地址](http://118.190.154.85)
 
 ## 前言
 
-'Taroco' 是一整套的微服务企业级解决方案。是微服务敏捷开发的代表。
+'Mallcloud' 是一整套的微服务企业级解决方案。是微服务敏捷开发的代表。
 
 ## 项目介绍
 
@@ -21,11 +21,11 @@ Cloud 为微服务架构开发涉及的统一认证，配置管理，服务治�
 
 Spring Cloud 本身已经封装得足够简单，也够丰富。也许正是因为这种简单而丰富，使得想要使用它的团队望而却步。学习成本太高，历史包袱太重，维护成本太高等等一系列原因。
 
-*Taroco* 就是为了解决这一问题而诞生的。 *Taroco* 整合了 Spring Cloud 的**配置中心**、**注册中心**、**服务网关**，提供了一系列starter组件，
+*Mallcloud* 就是为了解决这一问题而诞生的。 *Mallcloud* 整合了 Spring Cloud 的**配置中心**、**注册中心**、**服务网关**，提供了一系列starter组件，
 同时提供**服务治理**、**服务监控**、**OAuth2 权限认证**，支持**服务降级/熔断**、**基于标签(x-label)
 的路由**、**服务权重**，前端采用**vue+elementUI**，可以很好的解决技术转向 Spring Cloud 的一系列问题，努力打造全方位的微服务敏捷开发解决方案。
 
-*Taroco* 提供了基于 Docker Compose 的部署方式。配置文件统一放置在docs目录中，运行脚本案例在根目录中查找。
+*Mallcloud* 提供了基于 Docker Compose 的部署方式。配置文件统一放置在docs目录中，运行脚本案例在根目录中查找。
 
 ### 主要实现功能
 
@@ -41,49 +41,49 @@ Spring Cloud 本身已经封装得足够简单，也够丰富。也许正是因�
 
 ### 分支版本
 
-* Branch 1.5.12：基于 Spring Boot 1.5.12.RELEASE + Spring Cloud Edgware.SR4，是Taroco最初的版本。
+* Branch 1.5.12：基于 Spring Boot 1.5.12.RELEASE + Spring Cloud Edgware.SR4，是Mallcloud最初的版本。
 * Branch 2.x：基于 Spring Boot 2.0.5.RELEASE + Spring Cloud Finchley.SR1 是当前维护的版本。
 * Master 分支已经改为从2.x merge代码，今后更新的中心也会放在2.x分支上。
 
 ### 整体架构
 
-![架构图](https://github.com/liuht777/Taroco/blob/master/taroco-docs/files/taroco%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
+![架构图](https://github.com/liuht777/Mallcloud/blob/master/mallcloud-docs/files/mallcloud%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 ### 项目目录结构
 
 ```
-├── taroco-cloud  --微服务相关组件
+├── mallcloud-cloud  --微服务相关组件
 │   ├── cloud-admin --服务治理相关
 │   ├── cloud-config  --服务配置中心
 │   ├── cloud-monitor --服务监控
 │   ├── cloud-registry  --服务注册中心
-├── taroco-common-starter --自定义spring boot starter
-│   ├── taroco-common-spring-boot-starter --公共依赖模块(全局异常、常量、通用类)
-│   ├── taroco-log-spring-boot-starter --通用logback-spring、自定义banner
-│   ├── taroco-redis-spring-boot-starter --通用redis配置
-│   ├── taroco-ribbon-spring-boot-starter --基于ribbon的服务治理扩展
-│   ├── taroco-swagger2-spring-boot-starter --自定义封装swagger2配置
-├── taroco-demo --demo案例
-├── taroco-docs --文档、截图、docker文件、初始化脚本
-├── taroco-gateway --微服务网关
-├── taroco-oauth2 --认证中心
+├── mallcloud-common-starter --自定义spring boot starter
+│   ├── mallcloud-common-spring-boot-starter --公共依赖模块(全局异常、常量、通用类)
+│   ├── mallcloud-log-spring-boot-starter --通用logback-spring、自定义banner
+│   ├── mallcloud-redis-spring-boot-starter --通用redis配置
+│   ├── mallcloud-ribbon-spring-boot-starter --基于ribbon的服务治理扩展
+│   ├── mallcloud-swagger2-spring-boot-starter --自定义封装swagger2配置
+├── mallcloud-demo --demo案例
+├── mallcloud-docs --文档、截图、docker文件、初始化脚本
+├── mallcloud-gateway --微服务网关
+├── mallcloud-oauth2 --认证中心
 │   ├── authentication-server --统一认证服务
 │   ├── oauth2-config --oauth2抽象封装
 │   ├── sso-demo1 --sso案例
 │   ├── sso-demo1 --sso案例
-├── taroco-rbac --基于角色的权限控制服务
+├── mallcloud-rbac --基于角色的权限控制服务
 
 ```
 
 ### 项目截图
 
-![login](https://github.com/liuht777/Taroco/blob/master/taroco-docs/files/login.png)
-![menu](https://github.com/liuht777/Taroco/blob/master/taroco-docs/files/menu.png)
-![route](https://github.com/liuht777/Taroco/blob/master/taroco-docs/files/route.png)
-![monitor](https://github.com/liuht777/Taroco/blob/master/taroco-docs/files/monitor.png)
-![servers](https://github.com/liuht777/Taroco/blob/master/taroco-docs/files/servers.png)
-![api](https://github.com/liuht777/Taroco/blob/master/taroco-docs/files/api.png)
-![zipkin](https://github.com/liuht777/Taroco/blob/master/taroco-docs/files/zipkin.png)
+![login](https://github.com/liuht777/Mallcloud/blob/master/mallcloud-docs/files/login.png)
+![menu](https://github.com/liuht777/Mallcloud/blob/master/mallcloud-docs/files/menu.png)
+![route](https://github.com/liuht777/Mallcloud/blob/master/mallcloud-docs/files/route.png)
+![monitor](https://github.com/liuht777/Mallcloud/blob/master/mallcloud-docs/files/monitor.png)
+![servers](https://github.com/liuht777/Mallcloud/blob/master/mallcloud-docs/files/servers.png)
+![api](https://github.com/liuht777/Mallcloud/blob/master/mallcloud-docs/files/api.png)
+![zipkin](https://github.com/liuht777/Mallcloud/blob/master/mallcloud-docs/files/zipkin.png)
 
 ### 后端环境
 
@@ -97,7 +97,7 @@ Spring Cloud 本身已经封装得足够简单，也够丰富。也许正是因�
 
 ### 前端
 
-Taroco 前端基于开源项目 [D2Admin](https://github.com/d2-projects/d2-admin) 构建。
+Mallcloud 前端基于开源项目 [D2Admin](https://github.com/d2-projects/d2-admin) 构建。
 
 D2Admin 中文文档：[D2Admin Document](https://d2-projects.github.io/d2-admin-doc/zh/)。
 

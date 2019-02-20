@@ -3,21 +3,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.taroco</groupId>
-    <artifactId>taroco</artifactId>
+    <groupId>cn.mallcloud</groupId>
+    <artifactId>mallcloud</artifactId>
     <version>2.0.1-SNAPSHOT</version>
     <modules>
-        <module>taroco-common-starter</module>
-        <module>taroco-docs</module>
-        <module>taroco-cloud</module>
-        <module>taroco-gateway</module>
-        <module>taroco-authentication</module>
-        <module>taroco-rbac</module>
+        <module>mallcloud-common-starter</module>
+        <module>mallcloud-docs</module>
+        <module>mallcloud-cloud</module>
+        <module>mallcloud-gateway</module>
+        <module>mallcloud-authentication</module>
+        <module>mallcloud-rbac</module>
     </modules>
     <packaging>pom</packaging>
 
-    <name>taroco</name>
-    <description>taroco project for Spring Boot</description>
+    <name>mallcloud</name>
+    <description>mallcloud project for Spring Boot</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -78,28 +78,28 @@
             </dependency>
             <!-- 自定义 starter -->
             <dependency>
-                <groupId>cn.taroco</groupId>
-                <artifactId>taroco-common-spring-boot-starter</artifactId>
+                <groupId>cn.mallcloud</groupId>
+                <artifactId>mallcloud-common-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.taroco</groupId>
-                <artifactId>taroco-log-spring-boot-starter</artifactId>
+                <groupId>cn.mallcloud</groupId>
+                <artifactId>mallcloud-log-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.taroco</groupId>
-                <artifactId>taroco-redis-spring-boot-starter</artifactId>
+                <groupId>cn.mallcloud</groupId>
+                <artifactId>mallcloud-redis-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.taroco</groupId>
-                <artifactId>taroco-ribbon-spring-boot-starter</artifactId>
+                <groupId>cn.mallcloud</groupId>
+                <artifactId>mallcloud-ribbon-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.taroco</groupId>
-                <artifactId>taroco-swagger2-spring-boot-starter</artifactId>
+                <groupId>cn.mallcloud</groupId>
+                <artifactId>mallcloud-swagger2-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- spring-boot-admin server -->

@@ -23,6 +23,6 @@ dist/
 nbdist/
 .nb-gradle/
 
-### Taroco
+### Mallcloud
 logs
 LOG_FILE_IS_UNDEFINED
